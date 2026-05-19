@@ -1,0 +1,94 @@
+# ContextBoundary — Full LLM Digest
+
+Version: v0.1
+License: Apache 2.0
+Repo: https://github.com/kannanokannan/ContextBoundary
+
+---
+
+## What is ContextBoundary?
+
+ContextBoundary is a vendor-neutral technical-layer reference framework.
+It defines how AI systems should handle data boundaries across vendors,
+jurisdictions, and privacy tiers.
+
+It is NOT a runtime system. It is a specification layer.
+The runtime enforcement is handled by ContextOps.
+
+---
+
+## The Three-Layer Model
+
+Layer 3 — Client Solution Overlay (Client-owned)
+  Components: Business rules, Configuration scope, Output preferences
+
+Layer 2 — Domain Knowledge (Framework-owned — the moat)
+  Components: Agent logic, Knowledge library, Evaluation framework
+
+Layer 1 — Vendor LLM (Vendor-owned — substitutable)
+  Components: LLM client adapter, Model & API version, Cost / tokens
+
+ContextBoundary is the contract at the Layer 1 / Layer 2 boundary.
+It defines what the vendor can touch, what data tier crosses that line,
+and what compliance obligations apply.
+
+---
+
+## Five-Zone Boundary Model
+
+Z1 — Public inference: no PII, open context
+Z2 — Authenticated inference: session-bound, user-identified
+Z3 — Enriched context: structured personal data in prompt
+Z4 — Regulated data: compliance-scoped, audit-required
+Z5 — Restricted / sovereign: jurisdiction-locked, air-gapped
+
+---
+
+## Privacy Tier Classification
+
+Tier I   — Low risk: anonymised, aggregated, public data
+Tier II  — Medium risk: pseudonymised, session-scoped data
+Tier III — High risk: identified, regulated, cross-border data
+
+---
+
+## Jurisdictional Audit Profiles (v0.1)
+
+GDPR (gdpr.md)
+  - Lawful basis required for all processing
+  - Data subject rights: access, erasure, portability, objection
+  - Controller / processor distinction enforced at zone boundary
+  - Retention limits mapped per zone
+  - Cross-border transfer restrictions apply at Z4 and Z5
+
+Planned for v0.2: DPDP, RBI, HIPAA, SOC2, EU AI Act
+
+---
+
+## Relationship to ContextOps
+
+ContextBoundary  = specification layer (what is allowed, classified, audited)
+ContextOps       = execution layer (how agents behave within those boundaries)
+
+ContextBoundary does not enforce. It defines.
+ContextOps reads ContextBoundary profiles and enforces them at runtime.
+
+---
+
+## Key Files
+
+README.md             — Overview and roadmap
+FRAMEWORK.md          — Full specification
+ARCHITECTURE.md       — Three-layer model
+boundary-diagram.md   — Zone diagram
+tier-classification.md — Tier definitions
+vendor-tier-matrix.md — Vendor placements
+vendors.md            — Vendor catalog
+gdpr.md               — GDPR audit profile
+contextops-mapping.md — ContextOps connector spec
+CONTRIBUTING.md       — Contribution guidelines
+
+---
+
+*ContextBoundary v0.1 — Apache 2.0*
+*https://github.com/kannanokannan/ContextBoundary*

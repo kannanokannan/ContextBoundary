@@ -1,0 +1,33 @@
+# ContextBoundary
+
+> A vendor-neutral privacy and boundary framework for AI systems. Defines a five-zone vendor tier architecture, Privacy Tier I/II/III classification, jurisdictional Audit Profiles, and an Endpoint Atlas pattern. Connects to ContextOps as the specification layer.
+
+## Core Framework
+
+- [README](README.md): Project overview, structure, and roadmap
+- [FRAMEWORK](FRAMEWORK.md): Core framework specification
+- [ARCHITECTURE](ARCHITECTURE.md): Three-layer ownership model and where ContextBoundary sits
+
+## Boundary & Classification
+
+- [Boundary Diagram](boundary-diagram.md): Five-zone boundary diagram and zone definitions
+- [Tier Classification](tier-classification.md): Privacy Tier I / II / III definitions
+- [Vendor Tier Matrix](vendor-tier-matrix.md): Vendor placement across zones
+- [Vendors](vendors.md): Full vendor catalog
+
+## Compliance
+
+- [GDPR Audit Profile](gdpr.md): GDPR jurisdictional profile — lawful basis, data subject rights, retention, controller/processor obligations
+
+## Integration
+
+- [ContextOps Mapping](contextops-mapping.md): Connector specification between ContextBoundary and ContextOps
+
+## Contributing
+
+- [CONTRIBUTING](CONTRIBUTING.md): Contribution guidelines
+- License: Apache 2.0
+
+## Optional
+
+- [llms-full.txt](llms-full.txt): Full content dump for LLM ingestion
