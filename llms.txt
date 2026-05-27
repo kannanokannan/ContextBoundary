@@ -1,36 +1,25 @@
 # ContextBoundary
 
-> The egress governance specification for AI data flows. Deployment-agnostic, regulatory-mapped, enforceable at the network layer. Defines a five-zone vendor tier architecture, Egress Tier I/II/III classification (Tier I = never leaves the system, Tier III = explicit per-call API escalation), jurisdictional Audit Profiles, and an Endpoint Atlas. Connects to ContextOps as the technical-layer companion. One of three sibling frameworks: ContextOps (organisational governance), ContextBoundary (egress governance), Sthala (sovereign on-prem implementation).
+> Open-source egress governance specification for AI data flows. Deployment-agnostic, regulatory-mapped, enforceable at the network layer.
 
-## Core Framework
+ContextBoundary is one of three sibling open-source projects under github.com/kannanokannan that together define an AI governance stack:
 
-- [README](README.md): Project overview, positioning, and roadmap
-- [FRAMEWORK](FRAMEWORK.md): Core framework specification
-- [RATIONALE](RATIONALE.md): Why ContextBoundary exists — the sovereignty gap, regulatory context, and design decisions
+- ContextOps — How does an organisation govern its AI context?
+- ContextBoundary — Where is data allowed to go?
+- Sthala — Where does the AI actually run?
 
-## Boundary & Classification
+License: Apache 2.0. Status: v0.1 active.
 
-- [Boundary Diagram](boundary-diagram.md): Five-zone boundary diagram and zone definitions
-- [Tier Classification](tier-classification.md): Egress Tier I / II / III definitions and routing rules (Tier I = never leaves, Tier III = explicit API escalation)
-- [Vendor Tier Matrix](vendor-tier-matrix.md): Vendor placement across zones
+## Core
 
-## Compliance
+- [FRAMEWORK.md](https://github.com/kannanokannan/ContextBoundary/blob/main/FRAMEWORK.md): Core specification
+- [RATIONALE.md](https://github.com/kannanokannan/ContextBoundary/blob/main/RATIONALE.md): Why this exists — sovereignty gap, design decisions
+- [tier-classification.md](https://github.com/kannanokannan/ContextBoundary/blob/main/tier-classification.md): Egress Tier I/II/III definitions
+- [boundary-diagram.md](https://github.com/kannanokannan/ContextBoundary/blob/main/boundary-diagram.md): Five-zone canonical diagram
+- [vendor-tier-matrix.md](https://github.com/kannanokannan/ContextBoundary/blob/main/vendor-tier-matrix.md): Pipeline stages mapped to vendor zones
+- [gdpr.md](https://github.com/kannanokannan/ContextBoundary/blob/main/gdpr.md): GDPR Audit Profile
 
-- [GDPR Audit Profile](gdpr.md): GDPR jurisdictional profile — lawful basis, data subject rights, retention, controller/processor obligations
+## Related projects
 
-## Endpoint Atlas
-
-- [Vendors](vendors.md): Vendor registry classifying AI services by zone and egress tier
-
-## Integration
-
-- [ContextOps Mapping](contextops-mapping.md): Connector specification between ContextBoundary and ContextOps
-
-## Contributing
-
-- [CONTRIBUTING](CONTRIBUTING.md): Contribution guidelines
-- License: Apache 2.0
-
-## Optional
-
-- [llms-full.txt](llms-full.txt): Full content dump for LLM ingestion
+- [ContextOps](https://github.com/kannanokannan/ContextOps): AI context governance framework
+- [Sthala](https://github.com/kannanokannan/Sthala): Sovereign on-prem AI reference framework
