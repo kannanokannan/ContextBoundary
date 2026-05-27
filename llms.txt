@@ -1,23 +1,26 @@
 # ContextBoundary
 
-> A vendor-neutral privacy and boundary framework for AI systems. Defines a five-zone vendor tier architecture, Privacy Tier I/II/III classification, jurisdictional Audit Profiles, and an Endpoint Atlas pattern. Connects to ContextOps as the specification layer.
+> The egress governance specification for AI data flows. Deployment-agnostic, regulatory-mapped, enforceable at the network layer. Defines a five-zone vendor tier architecture, Egress Tier I/II/III classification (Tier I = never leaves the system, Tier III = explicit per-call API escalation), jurisdictional Audit Profiles, and an Endpoint Atlas. Connects to ContextOps as the technical-layer companion. One of three sibling frameworks: ContextOps (organisational governance), ContextBoundary (egress governance), Sthala (sovereign on-prem implementation).
 
 ## Core Framework
 
-- [README](README.md): Project overview, structure, and roadmap
+- [README](README.md): Project overview, positioning, and roadmap
 - [FRAMEWORK](FRAMEWORK.md): Core framework specification
-- [ARCHITECTURE](ARCHITECTURE.md): Three-layer ownership model and where ContextBoundary sits
+- [RATIONALE](RATIONALE.md): Why ContextBoundary exists — the sovereignty gap, regulatory context, and design decisions
 
 ## Boundary & Classification
 
 - [Boundary Diagram](boundary-diagram.md): Five-zone boundary diagram and zone definitions
-- [Tier Classification](tier-classification.md): Privacy Tier I / II / III definitions
+- [Tier Classification](tier-classification.md): Egress Tier I / II / III definitions and routing rules (Tier I = never leaves, Tier III = explicit API escalation)
 - [Vendor Tier Matrix](vendor-tier-matrix.md): Vendor placement across zones
-- [Vendors](vendors.md): Full vendor catalog
 
 ## Compliance
 
 - [GDPR Audit Profile](gdpr.md): GDPR jurisdictional profile — lawful basis, data subject rights, retention, controller/processor obligations
+
+## Endpoint Atlas
+
+- [Vendors](vendors.md): Vendor registry classifying AI services by zone and egress tier
 
 ## Integration
 
