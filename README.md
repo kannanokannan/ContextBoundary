@@ -1,10 +1,10 @@
 # ContextBoundary
 
-**The egress governance specification for AI data flows — deployment-agnostic, regulatory-mapped, enforced at the network layer.**
+When AI systems process data, that data moves — into prompts, embeddings, logs, vendor infrastructure. Most organisations have no governing policy for where it is permitted to go. That gap is a compliance failure waiting to happen.
 
-Version: 0.1 · License: Apache 2.0 · Read time: ~6 minutes
+ContextBoundary is the egress governance specification that closes it. Deployment-agnostic, regulatory-mapped, enforceable at the network layer.
 
-> Not to be confused with the Domain-Driven Design term, the UIKit API, or video alignment research of the same name. This is an AI data egress specification.
+Version: 0.1 · License: Apache 2.0 · [Not the DDD term, UIKit API, or video alignment research](https://github.com/kannanokannan/ContextBoundary)
 
 ---
 
