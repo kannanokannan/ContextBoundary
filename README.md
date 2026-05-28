@@ -210,3 +210,17 @@ Use ContextBoundary to make the boundary visible. The decisions about what to do
 ---
 
 ContextBoundary v0.1. Licensed under Apache 2.0. Feedback welcome via GitHub Issues.
+
+---
+
+## Part of the Stack
+
+This project is one of three sibling open-source projects under [github.com/kannanokannan](https://github.com/kannanokannan).
+
+| Project | Question | Repo |
+|---------|----------|------|
+| ContextOps | How does an org govern its AI context? | [github.com/kannanokannan/ContextOps](https://github.com/kannanokannan/ContextOps) |
+| ContextBoundary | Where is data allowed to go? | [github.com/kannanokannan/ContextBoundary](https://github.com/kannanokannan/ContextBoundary) |
+| Sthala | Where does the AI actually run? | [github.com/kannanokannan/Sthala](https://github.com/kannanokannan/Sthala) |
+
+Canonical terminology and cross-project decisions: [context-stack](https://github.com/kannanokannan/context-stack)
