@@ -1,4 +1,4 @@
-# Why ContextBoundary Exists
+# ContextBoundary — Rationale
 
 **The problem is not that organisations are using AI. The problem is that they do not know where their data goes when they do.**
 

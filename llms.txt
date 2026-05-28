@@ -12,14 +12,17 @@ License: Apache 2.0. Status: v0.1 active.
 
 ## Core
 
-- [FRAMEWORK.md](https://github.com/kannanokannan/ContextBoundary/blob/main/FRAMEWORK.md): Core specification
-- [RATIONALE.md](https://github.com/kannanokannan/ContextBoundary/blob/main/RATIONALE.md): Why this exists — sovereignty gap, design decisions
-- [tier-classification.md](https://github.com/kannanokannan/ContextBoundary/blob/main/tier-classification.md): Egress Tier I/II/III definitions
-- [boundary-diagram.md](https://github.com/kannanokannan/ContextBoundary/blob/main/boundary-diagram.md): Five-zone canonical diagram
-- [vendor-tier-matrix.md](https://github.com/kannanokannan/ContextBoundary/blob/main/vendor-tier-matrix.md): Pipeline stages mapped to vendor zones
-- [gdpr.md](https://github.com/kannanokannan/ContextBoundary/blob/main/gdpr.md): GDPR Audit Profile
+- [FRAMEWORK.md](https://github.com/kannanokannan/ContextBoundary/blob/main/FRAMEWORK.md): Core framework specification
+- [README.md](https://github.com/kannanokannan/ContextBoundary/blob/main/README.md): Project overview
+- [RATIONALE.md](https://github.com/kannanokannan/ContextBoundary/blob/main/RATIONALE.md): Why this exists — sovereignty gap, CLOUD Act, design decisions
+- [ARCHITECTURE.md](https://github.com/kannanokannan/ContextBoundary/blob/main/ARCHITECTURE.md): Three-layer ownership model (Vendor LLM / Domain Knowledge / Client Solution Overlay)
+- [tier-classification.md](https://github.com/kannanokannan/ContextBoundary/blob/main/tier-classification.md): Egress Tier I / II / III definitions
+- [boundary-diagram.md](https://github.com/kannanokannan/ContextBoundary/blob/main/boundary-diagram.md): Five-zone boundary diagram and zone definitions
+- [vendor-tier-matrix.md](https://github.com/kannanokannan/ContextBoundary/blob/main/vendor-tier-matrix.md): Vendor placement across zones
+- [gdpr.md](https://github.com/kannanokannan/ContextBoundary/blob/main/gdpr.md): GDPR jurisdictional audit profile
+- [contextops-mapping.md](https://github.com/kannanokannan/ContextBoundary/blob/main/contextops-mapping.md): Bridge to ContextOps methodology
 
 ## Related projects
 
-- [ContextOps](https://github.com/kannanokannan/ContextOps): AI context governance framework
+- [ContextOps](https://github.com/kannanokannan/ContextOps): Enterprise AI context governance framework
 - [Sthala](https://github.com/kannanokannan/Sthala): Sovereign on-prem AI reference framework
