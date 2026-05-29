@@ -8,6 +8,16 @@ Version: 0.1 · License: Apache 2.0 · [Not the DDD term, UIKit API, or video al
 
 ---
 
+## The Problem
+
+Modern AI systems let interpretation, decision-making, and execution share one trust boundary. That lets probabilistic systems directly own deterministic consequences — the root cause of prompt injection, unsafe automation, context contamination, and authority confusion.
+
+This project is part of the context-stack, which separates interpretation from authority: intelligence proposes, governance validates, execution authorizes. Intelligence can suggest anything. Authority stays deterministic.
+
+Full doctrine: https://github.com/kannanokannan/context-stack
+
+---
+
 ## What is ContextBoundary
 
 ContextBoundary is an open-source specification that defines where AI-processed data is permitted to flow — and where it is not. Every outbound flow is tagged with a privacy tier and a regulatory jurisdiction before it crosses the boundary, producing a written, auditable, enforceable contract between any AI system and the external services it touches.
