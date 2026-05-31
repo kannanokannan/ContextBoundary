@@ -1,95 +1,71 @@
 # ContextBoundary — Architecture Overview
 
-## The Three-Layer Model
+## The Boundary Model
 
-ContextBoundary operates within a three-layer ownership stack.
-Each layer has a distinct owner, a distinct responsibility, and a defined boundary.
+ContextBoundary models AI data movement as a five-zone egress chain. The question is not where the software runs. The question is which boundary a payload crosses, which vendor zone receives it, and which Egress Tier permits that crossing.
 
-```
-┌─────────────────────────────────────────────────────────┐
-│            Layer 3 — Client Solution Overlay             │
-│          Per-account configuration. Client-owned.        │
-│                                                          │
-│  Business rules  │  Configuration scope  │  Output prefs │
-└─────────────────────────────────────────────────────────┘
-                          depends on ↓
-┌─────────────────────────────────────────────────────────┐
-│              Layer 2 — Domain Knowledge                  │
-│        Proprietary methodology. Framework-owned.         │
-│                   This is the moat.                      │
-│                                                          │
-│   Agent logic   │   Knowledge library   │  Evaluation fw │
-└─────────────────────────────────────────────────────────┘
-                          depends on ↓
-┌─────────────────────────────────────────────────────────┐
-│                 Layer 1 — Vendor LLM                     │
-│            Rented capability. Substitutable.             │
-│                                                          │
-│  LLM client adapter  │  Model & API  │  Cost / tokens   │
-└─────────────────────────────────────────────────────────┘
-```
+The framework is deployment-agnostic. The same boundary model applies to on-prem, cloud, hybrid, sovereign regional cloud, and managed-service deployments.
 
 ---
 
 ## Where ContextBoundary Sits
 
-ContextBoundary is the **contract at the Layer 1 / Layer 2 boundary.**
+ContextBoundary is the technical-layer contract between an AI system and the external services it touches.
 
-It answers three questions at that boundary:
+It answers three questions at every outbound boundary:
 
-1. **What can the vendor touch?** — Zone classification
-2. **What tier of data crosses the line?** — Privacy Tier I / II / III
-3. **What are the obligations when it does?** — Jurisdictional Audit Profile (GDPR, DPDP, HIPAA...)
+1. **Which vendor zone receives the payload?** — Boundary Zone classification
+2. **What egress permission applies?** — Egress Tier I / II / III
+3. **Which obligations govern the crossing?** — Jurisdictional Audit Profile
 
-Without this contract, swapping a vendor at Layer 1 breaks assumptions in Layer 2.
-With it, Layer 1 is genuinely substitutable — and Layer 2 is genuinely protected.
-
----
-
-## Layer Ownership Summary
-
-| Layer | Name                    | Owned By  | Substitutable?        |
-|-------|-------------------------|-----------|-----------------------|
-| 3     | Client Solution Overlay | Client    | Per account           |
-| 2     | Domain Knowledge        | Framework | No — this is the moat |
-| 1     | Vendor LLM              | Vendor    | Yes — by design       |
+Without this contract, vendor substitutions and architecture changes silently alter compliance assumptions. With it, every crossing has a declared receiving zone, a permitted Egress Tier, and an auditable obligation set.
 
 ---
 
-## Five-Zone Boundary Model
+## Five Boundary Zones
 
-ContextBoundary maps all vendor interactions across five zones:
+ContextBoundary maps AI data flows across five zones:
 
-| Zone | Description                                          |
-|------|------------------------------------------------------|
-| Z1   | Public inference — no PII                            |
-| Z2   | Authenticated inference — session-bound              |
-| Z3   | Enriched context — structured personal data          |
-| Z4   | Regulated data — compliance-scoped                   |
-| Z5   | Restricted / sovereign — jurisdiction-locked         |
+| Zone | Role |
+|------|------|
+| Customer Sovereign | Source systems, identity, redaction, audit/WORM evidence |
+| AMS-Service Vendor | Integration, orchestration, managed-service operation |
+| Product Vendor | Application layer, vector store, embedding, retrieval, reranking |
+| Compute Vendor | Infrastructure, GPU/NPU hosting, storage custody |
+| LLM Vendor | Model inference and generation |
 
-Each vendor in the [Vendor Tier Matrix](vendor-tier-matrix.md) is placed into a zone.
-Each zone carries a Privacy Tier assignment.
+Each vendor in the [Vendor Tier Matrix](vendor-tier-matrix.md) is placed into one of these zones. Each crossing between zones is governed by an Egress Tier, a legal instrument, and any applicable Audit Profile constraints.
 
 ---
 
-## Privacy Tier Classification
+## Egress Tier Classification
 
-| Tier | Risk Level | Typical Data                          |
-|------|------------|---------------------------------------|
-| I    | Low        | Anonymised, aggregated, public        |
-| II   | Medium     | Pseudonymised, session-scoped         |
-| III  | High       | Identified, regulated, cross-border   |
+| Tier | Egress Rule | Typical Payload |
+|------|-------------|-----------------|
+| I | Never leaves the system | Sovereign data, PII, regulated records |
+| II | Anonymised aggregates only, with consent | Behavioural metrics, derived insights |
+| III | Explicit per-call API escalation | Public data, sanctioned external lookups |
+
+Tier I is the most restrictive. Tier III is the least restrictive. Lower number means higher protection.
+
+See [tier-classification.md](tier-classification.md) for the full routing rules, inheritance behavior, and failure modes.
+
+---
+
+## Audit Profiles
+
+Audit Profiles overlay jurisdiction-specific obligations onto the five-zone model. They do not replace the underlying regulation. They translate regulatory constraints into boundary constraints, metadata requirements, and evidence requirements.
+
+v0.1 ships GDPR as the reference Audit Profile. v0.2 is planned to add DPDP, RBI, HIPAA, SOC2, and EU AI Act profiles.
 
 ---
 
 ## Relationship to ContextOps
 
-ContextBoundary defines the boundary.
-ContextOps enforces it operationally.
+ContextBoundary defines the technical egress contract. ContextOps governs the organisational layer around that contract.
 
-- ContextBoundary = the **specification layer** (what is allowed, what is classified, what must be audited)
-- ContextOps = the **execution layer** (how agents behave within those boundaries at runtime)
+- ContextBoundary = the specification layer: what is allowed, what is classified, what must be audited
+- ContextOps = the governance layer: who owns the decision, how it is reviewed, how drift is handled
 
 See [contextops-mapping.md](contextops-mapping.md) for the full connector spec.
 

@@ -20,7 +20,7 @@ Full doctrine: https://github.com/kannanokannan/context-stack
 
 ## What is ContextBoundary
 
-ContextBoundary is an open-source specification that defines where AI-processed data is permitted to flow — and where it is not. Every outbound flow is tagged with a privacy tier and a regulatory jurisdiction before it crosses the boundary, producing a written, auditable, enforceable contract between any AI system and the external services it touches.
+ContextBoundary is an open-source specification that defines where AI-processed data is permitted to flow — and where it is not. Every outbound flow is tagged with an Egress Tier and a regulatory jurisdiction before it crosses the boundary, producing a written, auditable, enforceable contract between any AI system and the external services it touches.
 
 It is deployment-agnostic. On-prem, cloud, hybrid — the specification does not care where the AI runs. It cares where your data is allowed to go and under what conditions.
 
@@ -88,7 +88,7 @@ Five zones. Four boundary crossings. Three axes of constraint. One diagram that 
 
 | Axis | What it classifies | Established |
 |------|--------------------|-------------|
-| **Privacy Tier** | Egress permission: Tier I (never leaves) → Tier II (anonymised, with consent) → Tier III (explicit API escalation) | Yes — codified here |
+| **Egress Tier** | Egress permission: Tier I (never leaves) → Tier II (anonymised, with consent) → Tier III (explicit API escalation) | Yes — codified here |
 | **Geography / Jurisdiction** | Which regulatory regime governs the flow: GDPR, DPDP, RBI, HIPAA, EU AI Act, LGPD, CCPA, SOC2 | Partially — codified here as Audit Profiles |
 | **Vendor Tier Responsibility** | Which vendor zone operates the workload: Customer, AMS, Product, Compute, LLM | No — ContextBoundary's specific contribution |
 

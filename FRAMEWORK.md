@@ -1,6 +1,6 @@
 # ContextBoundary
 
-**Enterprise AI Technical Boundary Architecture**
+**AI Data Egress Governance Specification**
 
 Version: 0.1 (Draft) · Read time: ~12 minutes · License: Apache 2.0
 
@@ -8,7 +8,7 @@ Version: 0.1 (Draft) · Read time: ~12 minutes · License: Apache 2.0
 
 ## What is ContextBoundary
 
-ContextBoundary is a vendor-neutral, open-source reference architecture for enterprise AI boundary design. It gives organizations a structured way to classify data, place compute, distribute vendor responsibility, and produce defensible audit evidence across the AI delivery chain.
+ContextBoundary is a vendor-neutral, open-source specification for enterprise AI data egress governance. It gives organizations a structured way to classify outbound data flows, place compute, distribute vendor responsibility, and produce defensible audit evidence across the AI delivery chain.
 
 The framework operates at the technical layer. It overlays existing infrastructure, gateway, and identity stacks rather than replacing them. It is the technical companion to [ContextOps](https://github.com/kannanokannan/contextops), which operates at the organizational layer.
 
@@ -32,9 +32,9 @@ Most regulated enterprises now answer to two or three regulators simultaneously.
 
 Precise vocabulary is itself a deliverable. Buzzword drift kills shared understanding between architecture, security, procurement, and compliance teams. Shared understanding is the foundation for defensible AI deployment.
 
-**Boundary Zone** — One of five defined zones in the canonical diagram: Customer Sovereign, AMS/Service Vendor, Product Vendor, Compute Vendor, LLM Vendor. Each zone has a default Privacy Tier ceiling and a default contract type.
+**Boundary Zone** — One of five defined zones in the canonical diagram: Customer Sovereign, AMS/Service Vendor, Product Vendor, Compute Vendor, LLM Vendor. Each zone has a default Egress Tier ceiling and a default contract type.
 
-**Privacy Tier** — The classification of a data payload by sensitivity: Tier I (public/non-sensitive), Tier II (restricted/proprietary), Tier III (critical/sovereign). Adopted from established industry research.
+**Egress Tier** — The classification of a payload by permitted outbound flow: Tier I never leaves the system, Tier II may leave only as anonymised aggregates with consent, and Tier III may leave through explicit per-call API escalation.
 
 **Crossing Point** — A defined seam between two Boundary Zones. Every Crossing Point is governed by an explicit legal instrument (MSA, DPA, license, BAA, SCC, or cloud agreement) and an explicit data redaction or tokenization policy.
 
@@ -54,14 +54,14 @@ ContextBoundary operates across three independent axes. The intersection of all 
 
 | Axis | What it classifies | Defines |
 |---|---|---|
-| Privacy Tier | Data sensitivity | Which zones may process the data |
+| Egress Tier | Egress permission | Which crossings are permitted |
 | Geography / Jurisdiction | Which regulatory regime governs | Which crossings are permitted, restricted, or prohibited |
 | Vendor Tier Responsibility | Which vendor tier operates the stage | Which contract type governs the crossing |
 
 A single workload classification answers four questions:
 
 1. **WHO** operates this pipeline stage? (Vendor Tier Responsibility)
-2. **WHAT** Privacy Tier data may flow into it?
+2. **WHAT** Egress Tier may cross this boundary?
 3. **WHICH** jurisdictional rules apply at every crossing? (Audit Profile)
 4. **WHAT** legal instrument governs each crossing?
 
@@ -80,7 +80,7 @@ The four-question matrix is the unit of analysis the framework produces. Every C
 │ Audit/WORM│ Orchestr. │ Reranking │ Storage   │           │
 │ Identity  │ Monitoring│ App layer │ custody   │           │
 ├───────────┼───────────┼───────────┼───────────┼───────────┤
-│ Tier III  │ Tier II   │ Tier II   │ Tier I/II │ Tier I/II │
+│ Tier I    │ Tier II   │ Tier II   │ Tier II/III│ Tier II/III│
 ├───────────┼───────────┼───────────┼───────────┼───────────┤
 │ Customer  │ MSA + DPA │ License + │ Cloud     │ BAA/DPA + │
 │accountable│           │ DPA       │ agreement │ contract  │
@@ -97,7 +97,7 @@ Five zones. Four crossings. The diagram is the framework's hero artifact. Detail
 
 A canonical use case walks through the diagram to illustrate the framework in operation: enterprise document RAG with selective frontier inference.
 
-A user query enters the Customer Sovereign Zone. The local PII detection layer classifies the payload and assigns a Privacy Tier. Tier III content is identified and either redacted or held for local-only processing. The cleaned query and its retrieval context are passed through the AMS/Service Vendor zone for orchestration. The Product Vendor zone hosts the vector database and reranking layer that returns enterprise document chunks. For complex reasoning, the orchestrator routes a redacted prompt through the Compute Vendor zone to the LLM Vendor for inference. The response returns through the same chain. The output is reattached to original tokens in the Customer Sovereign Zone before delivery to the user. Every crossing logs to WORM storage in the Customer Sovereign Zone, with timestamp, payload hash, classification decision, and vendor tier identifier.
+A user query enters the Customer Sovereign Zone. The local PII detection layer classifies the payload and assigns an Egress Tier. Tier I content is identified and either held inside the Customer Sovereign Zone or transformed into a Tier II or Tier III equivalent before crossing. The cleaned query and its retrieval context are passed through the AMS/Service Vendor zone for orchestration. The Product Vendor zone hosts the vector database and reranking layer that returns enterprise document chunks. For complex reasoning, the orchestrator routes a permitted prompt through the Compute Vendor zone to the LLM Vendor for inference. The response returns through the same chain. The output is reattached to original tokens in the Customer Sovereign Zone before delivery to the user. Every crossing logs to WORM storage in the Customer Sovereign Zone, with timestamp, payload hash, classification decision, and vendor tier identifier.
 
 The same workload, under a different Audit Profile, may have different permissible crossings. Under a GDPR Profile, the LLM Vendor crossing requires SCC verification. Under a DPDP Profile, the same crossing may be permitted directly but with localized data residency. Under an RBI Profile applied to financial customer data, the LLM Vendor crossing may be prohibited entirely, forcing local inference.
 
@@ -107,7 +107,7 @@ An Audit Profile is a regulation-specific overlay on the canonical boundary diag
 
 1. **Regulation summary** — short, factual restatement of what the regulation covers and what triggers its application.
 2. **Mandatory boundary constraints** — which zones are restricted, which crossings are prohibited, and under what conditions exceptions are permitted.
-3. **Privacy Tier mapping** — how the regulation's data categories map to Tier I/II/III. Where the regulation defines its own taxonomy (special categories, financial records, health data), the mapping is explicit.
+3. **Egress Tier mapping** — how the regulation's data categories map to Tier I/II/III. Where the regulation defines its own taxonomy (special categories, financial records, health data), the mapping is explicit.
 4. **Required asset metadata** — what each Context Asset must record to support audit. This typically includes lawful basis, controller or processor designation, retention period, and cross-border transfer mechanism where applicable.
 5. **Evidence requirements** — what artifacts the regulator may demand. DPIAs, ROPAs, transfer impact assessments, audit logs, breach notification records, attestation reports.
 6. **Conflict with other profiles** — explicit notes where this profile conflicts with another (for example, GDPR data minimization vs. industry-specific retention mandates).
@@ -132,7 +132,7 @@ ContextOps governs the organizational layer of enterprise AI. ContextBoundary go
 
 The bridge is bidirectional:
 
-- ContextBoundary's Privacy Tier classification is metadata attached to ContextOps' Context Assets.
+- ContextBoundary's Egress Tier classification is metadata attached to ContextOps' Context Assets.
 - ContextBoundary's Audit Profile selection is a Curate-stage decision in the ContextOps spine.
 - ContextBoundary's Vendor Tier Responsibility matrix is the technical realization of ContextOps' AI Amplifier Assessment for compute boundaries.
 - ContextBoundary's Sovereign Egress logging feeds ContextOps' Renew-stage drift monitoring and Non-Deterministic Triage Protocol.
@@ -165,7 +165,7 @@ ContextBoundary sits on top of:
 - Established industry hybrid deployment patterns (cloud-train on-prem-serve, on-prem-anonymize cloud-fine-tune, fully sovereign on-prem)
 - Existing AI gateway implementations including open-source and commercial products
 - NIST AI RMF 1.0 risk taxonomy
-- Privacy Tier I/II/III classification as documented across regulated industry literature
+- Egress Tier I/II/III classification as documented across regulated industry literature
 
 It does not replace any of them.
 
