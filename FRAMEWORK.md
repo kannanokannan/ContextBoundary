@@ -2,7 +2,7 @@
 
 **AI Data Egress Governance Specification**
 
-Version: 0.1 (Draft) · Read time: ~12 minutes · License: Apache 2.0
+Version: 0.1 · Read time: ~12 minutes · License: Apache 2.0
 
 ---
 
@@ -91,7 +91,7 @@ GDPR / DPDP / RBI                            BAA, SCC, DPA
 jurisdiction-bound                            contract-bound
 ```
 
-Five zones. Four crossings. The diagram is the framework's hero artifact. Detailed annotations are in [`architecture/boundary-diagram.md`](architecture/boundary-diagram.md).
+Five zones. Four crossings. The diagram is the framework's hero artifact. Detailed annotations are in [`boundary-diagram.md`](boundary-diagram.md).
 
 ## Reference Topology
 
@@ -139,7 +139,7 @@ The bridge is bidirectional:
 
 ContextOps without ContextBoundary leaves technical placement decisions implicit. ContextBoundary without ContextOps leaves organizational ownership of those decisions implicit. Either can be adopted alone. Both gain operational potential when paired.
 
-See [`connectors/contextops-mapping.md`](connectors/contextops-mapping.md) for the complete cross-mapping.
+See [`contextops-mapping.md`](contextops-mapping.md) for the complete cross-mapping.
 
 ## What ContextBoundary is NOT
 
@@ -171,6 +171,6 @@ It does not replace any of them.
 
 ---
 
-ContextBoundary v0.1 — Draft. Stubs marked 🚧. Feedback welcome via GitHub Issues.
+ContextBoundary v0.1. Feedback welcome via GitHub Issues.
 
 Licensed under Apache 2.0.

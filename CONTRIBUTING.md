@@ -4,7 +4,7 @@ ContextBoundary is an open framework. Contributions are welcome from architects,
 
 ## Before You Start
 
-Read [`FRAMEWORK.md`](FRAMEWORK.md) in full. Read the existing Audit Profile in [`audit-profiles/gdpr.md`](audit-profiles/gdpr.md) and the [`connectors/contextops-mapping.md`](connectors/contextops-mapping.md) before proposing additions. The framework's value depends on internal consistency. Contributions that drift in tone or structure cost more to review than they save.
+Read [`FRAMEWORK.md`](FRAMEWORK.md) in full. Read the existing Audit Profile in [`gdpr.md`](gdpr.md) and the [`contextops-mapping.md`](contextops-mapping.md) before proposing additions. The framework's value depends on internal consistency. Contributions that drift in tone or structure cost more to review than they save.
 
 ## How to Propose Changes
 
@@ -25,7 +25,7 @@ ContextBoundary documents must read as if written by the same author. Specific r
 
 ## Adding an Audit Profile
 
-New Audit Profiles must follow the section order defined in [`audit-profiles/README.md`](audit-profiles/README.md). Use [`audit-profiles/gdpr.md`](audit-profiles/gdpr.md) as the structural reference.
+New Audit Profiles must follow the section order used in [`gdpr.md`](gdpr.md). Keep the same pattern: regulation summary, mandatory boundary constraints, Egress Tier mapping, required asset metadata, evidence requirements, conflicts with other profiles, and worked application.
 
 Audit Profiles are architectural documents, not legal interpretations. Where a regulation is ambiguous, the profile should state the ambiguity rather than resolve it. Legal interpretation is the responsibility of the adopting organization.
 

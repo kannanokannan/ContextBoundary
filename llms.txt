@@ -15,7 +15,7 @@ License: Apache 2.0. Status: v0.1 active.
 - [FRAMEWORK.md](https://github.com/kannanokannan/ContextBoundary/blob/main/FRAMEWORK.md): Core framework specification
 - [README.md](https://github.com/kannanokannan/ContextBoundary/blob/main/README.md): Project overview
 - [RATIONALE.md](https://github.com/kannanokannan/ContextBoundary/blob/main/RATIONALE.md): Why this exists — sovereignty gap, CLOUD Act, design decisions
-- [ARCHITECTURE.md](https://github.com/kannanokannan/ContextBoundary/blob/main/ARCHITECTURE.md): Three-layer ownership model (Vendor LLM / Domain Knowledge / Client Solution Overlay)
+- [ARCHITECTURE.md](https://github.com/kannanokannan/ContextBoundary/blob/main/ARCHITECTURE.md): Five-zone egress boundary model
 - [tier-classification.md](https://github.com/kannanokannan/ContextBoundary/blob/main/tier-classification.md): Egress Tier I / II / III definitions
 - [boundary-diagram.md](https://github.com/kannanokannan/ContextBoundary/blob/main/boundary-diagram.md): Five-zone boundary diagram and zone definitions
 - [vendor-tier-matrix.md](https://github.com/kannanokannan/ContextBoundary/blob/main/vendor-tier-matrix.md): Vendor placement across zones

@@ -130,6 +130,6 @@ For collapsed configurations, the framework still applies: every Crossing Point 
 
 - [Egress Tier Classification](tier-classification.md) — defines Tier I/II/III in detail
 - [Vendor Tier Responsibility Matrix](vendor-tier-matrix.md) — defines which pipeline stages may occur in which zones
-- [Audit Profiles](../audit-profiles/) — regulation-specific overlays that constrain the diagram
-- [Endpoint Atlas](../endpoint-atlas/) — registry of specific AI vendors and their default zones
-- [ContextOps Mapping](../connectors/contextops-mapping.md) — how the diagram connects to organizational governance
+- [GDPR Audit Profile](gdpr.md) — regulation-specific overlay that constrains the diagram
+- [Endpoint Atlas](vendors.md) — registry of specific AI vendors and their default zones
+- [ContextOps Mapping](contextops-mapping.md) — how the diagram connects to organizational governance

@@ -191,22 +191,21 @@ ContextOps governs the organisational layer. ContextBoundary governs the egress 
 
 ```
 contextboundary/
-├── README.md                          # This document
+├── README.md                          # Project overview
 ├── FRAMEWORK.md                       # Core specification
+├── ARCHITECTURE.md                    # Five-zone egress boundary model
+├── RATIONALE.md                       # Design rationale and positioning
+├── CLAUDE.md                          # Agent briefing
 ├── LICENSE                            # Apache 2.0
 ├── CONTRIBUTING.md                    # Contribution guidelines
-├── architecture/
-│   ├── boundary-diagram.md            # Canonical diagram with annotations
-│   ├── tier-classification.md         # Egress Tier I/II/III definitions
-│   └── vendor-tier-matrix.md          # Five-zone responsibility matrix
-├── audit-profiles/
-│   ├── README.md                      # Audit Profile pattern
-│   └── gdpr.md                        # GDPR profile (v0.1 reference)
-├── endpoint-atlas/
-│   ├── README.md                      # Endpoint Atlas pattern
-│   └── vendors.md                     # Starter vendor registry
-└── connectors/
-    └── contextops-mapping.md          # Bridge to ContextOps methodology
+├── boundary-diagram.md                # Canonical diagram with annotations
+├── tier-classification.md             # Egress Tier I/II/III definitions
+├── vendor-tier-matrix.md              # Five-zone responsibility matrix
+├── gdpr.md                            # GDPR profile (v0.1 reference)
+├── vendors.md                         # Starter vendor registry
+├── contextops-mapping.md              # Bridge to ContextOps methodology
+├── llms.txt                           # LLM discoverability summary
+└── llms-full.txt                      # Full LLM digest
 ```
 
 ---
