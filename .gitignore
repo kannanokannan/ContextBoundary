@@ -20,6 +20,7 @@ dist/
 node_modules/
 *.tmp
 *.bak
+mnt/
 
 # Local notes (not for repo)
 NOTES.local.md
@@ -28,6 +29,9 @@ TODO.local.md
 
 # Claude Code local config
 .claude/
+
+# Codex local memory
+.codex/
 
 # Archives
 *.zip
