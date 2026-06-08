@@ -16,7 +16,7 @@ The silences are deliberate. Each framework owns one half of the problem. The br
 
 | ContextBoundary concept | ContextOps stage or practice |
 |---|---|
-| Privacy Tier classification (per Context Asset) | Curate stage; metadata on the Context Asset assigned by the Context Owner |
+| Egress Tier classification (per Context Asset) | Curate stage; metadata on the Context Asset assigned by the Context Owner |
 | Audit Profile selection (per deployment) | Curate stage decision; reviewed during the Transition Context Audit |
 | Vendor Tier Responsibility Matrix application | Operationalizes the AI Amplifier Assessment for compute boundaries |
 | Boundary Zone assignment | Supply stage; determines which agents can be supplied to which zones |
@@ -49,7 +49,7 @@ ContextOps defines five roles. Each role has specific ContextBoundary responsibi
 | ContextOps Role | ContextBoundary Responsibility |
 |---|---|
 | Context Architect | Owns the canonical boundary diagram for the organization; selects active Audit Profiles |
-| Context Owner | Assigns Privacy Tier classification to assets within the owner's domain |
+| Context Owner | Assigns Egress Tier classification to assets within the owner's domain |
 | Context Curator | Maintains the Endpoint Atlas entries used by the organization; flags entries needing refresh |
 | AI Onboarding Manager | Verifies boundary diagram compliance during agent onboarding; runs the AI Amplifier Assessment with boundary inputs |
 | Agent Operations Lead | Monitors Crossing Point logs; triggers drift remediation when boundary violations occur |
@@ -64,7 +64,7 @@ ContextOps defines a five-level maturity model. ContextBoundary alignment per le
 |---|---|
 | Level 1 (Ad hoc) | No boundary diagram exists; crossings occur without classification or logging |
 | Level 2 (Repeatable) | Informal boundary awareness; teams may apply ad-hoc tier classification to high-sensitivity assets |
-| Level 3 (Defined) | Canonical boundary diagram documented; Privacy Tiers assigned per asset; at least one Audit Profile applied |
+| Level 3 (Defined) | Canonical boundary diagram documented; Egress Tiers assigned per asset; at least one Audit Profile applied |
 | Level 4 (Managed) | Crossing logs operational in WORM storage; Endpoint Atlas maintained; drift monitored |
 | Level 5 (Optimizing) | Boundary diagram and Audit Profile selections drive procurement decisions; framework metrics inform AI investment |
 
@@ -77,7 +77,7 @@ Mapping ContextBoundary activities to the ContextOps four-stage spine:
 | Spine Stage | ContextBoundary Activity |
 |---|---|
 | Capture | Identifying assets that cross zone boundaries; documenting current-state crossings |
-| Curate | Assigning Privacy Tier to assets; selecting applicable Audit Profiles; resolving Endpoint Atlas conflicts |
+| Curate | Assigning Egress Tier to assets; selecting applicable Audit Profiles; resolving Endpoint Atlas conflicts |
 | Supply | Onboarding agents within their permitted zones; configuring Crossing Point governance and logging |
 | Renew | Monitoring crossing logs; refreshing Audit Profiles when regulatory guidance changes; updating Endpoint Atlas entries as vendor offerings evolve |
 
@@ -88,7 +88,7 @@ For an organization adopting both frameworks together, a recommended sequence:
 1. **Establish ContextOps Level 2 baseline.** Shared vocabulary, problem definition, stakeholder alignment. Without this, technical boundary work has no organizational home.
 2. **Draft the canonical boundary diagram.** Identify which zones exist in the current state. Mark crossings.
 3. **Select primary Audit Profile.** Most organizations have one dominant regulatory regime. Apply it. Add additional profiles as multi-jurisdictional coverage requires.
-4. **Assign Privacy Tier classification** to existing Context Assets, starting with the highest-sensitivity domains.
+4. **Assign Egress Tier classification** to existing Context Assets, starting with the highest-sensitivity domains.
 5. **Build Crossing Point logging** to WORM storage. This is the foundation for evidence production.
 6. **Onboard new agents through the boundary diagram.** No agent reaches production without explicit zone assignment, tier classification, and Audit Profile compliance.
 7. **Monitor and renew.** Crossing logs feed drift detection. Audit Profile freshness is tracked. The boundary diagram is reviewed quarterly or when major regulatory changes occur.
@@ -111,7 +111,7 @@ A few common failure modes when both frameworks are adopted but not properly int
 
 **Crossing logs not flowing to Renew stage.** Crossing logs are an evidence artifact for ContextBoundary and a drift signal for ContextOps. If they do not flow to the Agent Operations Lead, drift goes undetected. The integration is the bridge's primary purpose.
 
-**Tier classification without ownership.** Privacy Tier metadata on a Context Asset without an assigned Context Owner is a label without an accountable party. The Context Owner is what makes the classification defensible.
+**Tier classification without ownership.** Egress Tier metadata on a Context Asset without an assigned Context Owner is a label without an accountable party. The Context Owner is what makes the classification defensible.
 
 ## Future Bridge Work
 

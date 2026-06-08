@@ -61,18 +61,19 @@ Under the GDPR Profile, the canonical boundary diagram is constrained as follows
 - Personal data crossing to any zone that retains the data beyond the controller-defined retention period.
 - Automated processing producing legal effects on data subjects without Article 22-compliant human review at the Customer Sovereign Zone output stage.
 
-## 3. Privacy Tier Mapping
+## 3. Egress Tier Mapping
 
 | GDPR Category | ContextBoundary Tier | Notes |
 |---|---|---|
-| Anonymous data (truly irreversible) | Tier I | Anonymization must be irreversible; pseudonymization is not anonymization. |
-| Pseudonymized personal data | Tier II | Remains personal data under GDPR; treated as Tier II with redaction policies. |
-| Personal data (Article 4) | Tier II minimum | May escalate to Tier III based on context and sensitivity. |
-| Special categories (Article 9) | Tier III | Health, biometric, racial, political, religious, sexual orientation, trade union, genetic. |
-| Criminal conviction data (Article 10) | Tier III | Subject to additional safeguards under member state law. |
-| Children's data (Article 8) | Tier III | Heightened protection regardless of category. |
+| Anonymous aggregate data (truly irreversible) | Tier II | Anonymization must be irreversible; pseudonymization is not anonymization. |
+| Public non-personal data | Tier III | May egress through explicit per-call API escalation where logging and purpose declaration are active. |
+| Pseudonymized personal data | Tier I by default | Remains personal data under GDPR; may become Tier II only after aggregation or transformation removes re-identification risk for the receiving zone. |
+| Personal data (Article 4) | Tier I by default | May not leave the Customer Sovereign Zone in raw or identifying form unless transformed before crossing. |
+| Special categories (Article 9) | Tier I | Health, biometric, racial, political, religious, sexual orientation, trade union, genetic. |
+| Criminal conviction data (Article 10) | Tier I | Subject to additional safeguards under member state law. |
+| Children's data (Article 8) | Tier I | Heightened protection regardless of category. |
 
-Where a payload contains data of mixed categories, the highest applicable Tier governs the entire payload until the higher-Tier component is irreversibly removed.
+Where a payload contains mixed categories, the most restrictive applicable Tier governs the entire payload until the restrictive component is irreversibly removed.
 
 ## 4. Required Asset Metadata
 
@@ -126,8 +127,8 @@ Consider an EU-based insurance company deploying an AI agent to summarize custom
 **Personal data categories:** Identifiers (customer name, policy number), contact data, claim narrative content potentially including health information (special category).
 
 **GDPR Profile application:**
-- The claim narrative may contain Article 9 special category data. Special category data is Tier III under this profile. Tier III data may not by default cross to the LLM Vendor zone.
-- Two options: (a) deploy a self-hosted LLM within the Customer Sovereign Zone or within a Compute Vendor zone with EU residency, eliminating the LLM Vendor crossing for sensitive content; (b) implement a redaction layer in the Customer Sovereign Zone that removes special category content before the prompt reaches the LLM Vendor, with the LLM operating on Tier II content only.
+- The claim narrative may contain Article 9 special category data. Special category data is Tier I under this profile. Tier I data may not by default cross to the LLM Vendor zone.
+- Two options: (a) deploy a self-hosted LLM within the Customer Sovereign Zone or within a Compute Vendor zone with EU residency, eliminating the LLM Vendor crossing for sensitive content; (b) implement a redaction layer in the Customer Sovereign Zone that removes special category content before the prompt reaches the LLM Vendor, with the LLM operating on Tier II or Tier III content only.
 - The AMS provider requires an Article 28 DPA. Their access to plaintext customer data must be limited to the minimum necessary for their operational responsibilities.
 - The Product Vendor (vector database) must be configured with EU residency or under SCCs. Customer documents stored as embeddings are personal data and require the same protections as the source.
 - The LLM Vendor relationship requires SCCs and a Transfer Impact Assessment if the vendor operates outside the EU. The TIA must address the destination jurisdiction's surveillance regime.

@@ -15,7 +15,7 @@ The boundary diagram is ContextBoundary's hero artifact. A single visual that an
 │ Audit/WORM│ Orchestr. │ Reranking │ Storage   │           │
 │ Identity  │ Monitoring│ App layer │ custody   │           │
 ├───────────┼───────────┼───────────┼───────────┼───────────┤
-│ Tier III  │ Tier II   │ Tier II   │ Tier I/II │ Tier I/II │
+│ Tier I    │ Tier II   │ Tier II   │ Tier II/III│ Tier II/III│
 ├───────────┼───────────┼───────────┼───────────┼───────────┤
 │ Customer  │ MSA + DPA │ License + │ Cloud     │ BAA/DPA + │
 │accountable│           │ DPA       │ agreement │ contract  │
@@ -28,13 +28,13 @@ jurisdiction-bound                            contract-bound
 
 ## How to Read the Diagram
 
-The diagram is read left to right. Data originates in the Customer Sovereign Zone and flows rightward through the vendor ecosystem to reach the LLM Vendor. Response data flows back leftward. Every crossing between zones is a Crossing Point, and every Crossing Point is governed by an explicit legal instrument and an explicit Privacy Tier ceiling.
+The diagram is read left to right. Data originates in the Customer Sovereign Zone and flows rightward through the vendor ecosystem to reach the LLM Vendor. Response data flows back leftward. Every crossing between zones is a Crossing Point, and every Crossing Point is governed by an explicit legal instrument and an explicit Egress Tier policy.
 
 The rows of the diagram answer four questions for each zone:
 
 - **Row 1 (zone name)** — Who operates this part of the pipeline.
 - **Row 2 (pipeline stages)** — Which AI pipeline activities happen here by default.
-- **Row 3 (Privacy Tier ceiling)** — The maximum Privacy Tier of data this zone may process.
+- **Row 3 (Egress Tier policy)** — The default egress permission for data crossing into or out of this zone.
 - **Row 4 (governing instrument)** — The legal contract type that defines the boundary between this zone and the adjacent ones.
 
 The two arrows below the diagram mark the regulatory perimeter. Jurisdictional regulation (GDPR, DPDP, RBI) binds the Customer Sovereign Zone and constrains all egress. Contract instruments (BAA, SCC, DPA) bind the relationships with the rightmost vendor zones.
@@ -47,7 +47,7 @@ The zone the adopting organization owns and operates directly. This zone is the 
 
 Default pipeline stages: data capture from source systems, PII and PHI detection and redaction, identity and access control (federated identity provider integration), policy and routing decisions, audit log writing to WORM storage, output reconciliation and de-tokenization.
 
-Default Privacy Tier ceiling: Tier III. The Customer Sovereign Zone is the only zone that may process Tier III data by default.
+Default Egress Tier policy: Tier I. The Customer Sovereign Zone is the only zone that may hold Tier I data by default. Tier I data does not leave this zone unless it is transformed into a Tier II or Tier III equivalent before crossing.
 
 Governing instrument: customer accountability. No contract governs the boundary of this zone from the outside, because there is no outside party operating within it. Internal accountability is governed by the organization's own policies, ContextOps role assignments, and internal audit.
 
@@ -57,7 +57,7 @@ The zone operated by a Managed Application Services provider, system integrator,
 
 Default pipeline stages: data ingestion from customer source systems, ETL transformations, prompt and response orchestration, monitoring and alerting, operational dashboards.
 
-Default Privacy Tier ceiling: Tier II. AMS vendors may process restricted data under contractual controls but should not by default see Tier III data. Where Tier III data must transit through the AMS zone, it must be redacted, tokenized, or encrypted such that the AMS provider cannot reconstruct it.
+Default Egress Tier policy: Tier II. AMS vendors may process anonymised or aggregated data under contractual controls. Tier I data must not be visible to the AMS provider in raw or identifying form; it must be redacted, tokenized, encrypted, or otherwise transformed before crossing.
 
 Governing instrument: Master Service Agreement (MSA) plus a Data Processing Agreement (DPA). The DPA defines the AMS provider's processor obligations under GDPR, DPDP, or other applicable regulation.
 
@@ -67,7 +67,7 @@ The zone operated by a product vendor providing a packaged AI capability — vec
 
 Default pipeline stages: vector database storage and search, embedding generation, retrieval and reranking, application-layer logic, prompt assembly.
 
-Default Privacy Tier ceiling: Tier II. Product vendors typically should not see Tier III data unless explicitly contracted and architecturally enabled (for example, a self-hosted product deployed entirely within the Customer Sovereign Zone).
+Default Egress Tier policy: Tier II. Product vendors typically receive anonymised or aggregated payloads under explicit contractual controls. Tier I data should not enter the Product Vendor zone unless the product is deployed inside the Customer Sovereign Zone or an equivalent customer-controlled enclave.
 
 Governing instrument: software license plus a Data Processing Agreement. The license defines product usage; the DPA defines data handling.
 
@@ -79,7 +79,7 @@ The Compute Vendor zone is distinct from the LLM Vendor zone because the compute
 
 Default pipeline stages: GPU and NPU hosting, model weight storage, ephemeral inference compute, infrastructure-level monitoring.
 
-Default Privacy Tier ceiling: Tier I/II for general workloads. Tier III workloads on a Compute Vendor zone require either an air-gapped enclave configuration or a fully isolated tenant with explicit jurisdictional residency guarantees.
+Default Egress Tier policy: Tier II/III for general workloads. Compute Vendor crossings require explicit residency, custody, and logging controls. Tier I workloads on a Compute Vendor zone require either an air-gapped enclave configuration or a fully isolated tenant with explicit jurisdictional residency guarantees.
 
 Governing instrument: cloud agreement or hardware-as-a-service agreement. Where customer data resides on the vendor's infrastructure, an additional DPA applies.
 
@@ -89,7 +89,7 @@ The zone operated by the model provider. The LLM Vendor zone executes the infere
 
 Default pipeline stages: model inference, generation, optional fine-tuning, model lifecycle management on the vendor's side.
 
-Default Privacy Tier ceiling: Tier I/II. Tier III data should not cross to the LLM Vendor zone except in cases where the LLM Vendor zone is collapsed into the Compute Vendor or Customer Sovereign zones — for example, a fully on-premises model deployment, or a model running inside a customer-controlled enclave on Compute Vendor infrastructure.
+Default Egress Tier policy: Tier II/III. Tier I data should not cross to the LLM Vendor zone except where the LLM Vendor zone is collapsed into the Customer Sovereign Zone or a customer-controlled Compute Vendor enclave. Tier III crossings require explicit per-call declaration and logging.
 
 Governing instrument: model service contract, optionally including a Business Associate Agreement (BAA) for HIPAA-covered workloads, Standard Contractual Clauses (SCCs) for cross-border GDPR-covered data, and a Data Processing Agreement.
 
@@ -98,7 +98,7 @@ Governing instrument: model service contract, optionally including a Business As
 The diagram has four Crossing Points between its five zones. Each Crossing Point must be governed by:
 
 1. An explicit legal instrument (named above).
-2. An explicit Privacy Tier policy (what tiers may cross, under what redaction or tokenization).
+2. An explicit Egress Tier policy (what tiers may cross, under what redaction or tokenization).
 3. An explicit logging policy (every crossing logs to WORM storage in the Customer Sovereign Zone).
 4. An explicit jurisdictional check (the active Audit Profile defines which crossings are permitted in which directions).
 
@@ -110,7 +110,7 @@ A CIO, security architect, or compliance officer using the diagram for assessmen
 
 1. **Identify which zones currently exist** in the organization's AI deployment. Some organizations have only Customer Sovereign and LLM Vendor (direct API consumption). Others have all five (AMS-led delivery with product vendor on managed cloud GPU running a frontier LLM).
 2. **For each Crossing Point that exists**, name the legal instrument that governs it.
-3. **For each Crossing Point**, name the Privacy Tier ceiling and the redaction policy.
+3. **For each Crossing Point**, name the Egress Tier policy and the redaction policy.
 4. **For each Crossing Point**, confirm logging is active and captured in WORM storage.
 5. **Overlay the applicable Audit Profile** (or profiles, for multi-jurisdictional deployments). Each profile constrains the diagram further.
 
@@ -128,7 +128,7 @@ For collapsed configurations, the framework still applies: every Crossing Point 
 
 ## Related Documents
 
-- [Privacy Tier Classification](tier-classification.md) — defines Tier I/II/III in detail
+- [Egress Tier Classification](tier-classification.md) — defines Tier I/II/III in detail
 - [Vendor Tier Responsibility Matrix](vendor-tier-matrix.md) — defines which pipeline stages may occur in which zones
 - [Audit Profiles](../audit-profiles/) — regulation-specific overlays that constrain the diagram
 - [Endpoint Atlas](../endpoint-atlas/) — registry of specific AI vendors and their default zones
