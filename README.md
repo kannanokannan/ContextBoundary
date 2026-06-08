@@ -22,6 +22,8 @@ Full doctrine: https://github.com/kannanokannan/context-stack
 
 ContextBoundary is an open-source specification that defines where AI-processed data is permitted to flow — and where it is not. Every outbound flow is tagged with an Egress Tier and a regulatory jurisdiction before it crosses the boundary, producing a written, auditable, enforceable contract between any AI system and the external services it touches.
 
+ContextBoundary is also a policy boundary for AI agents: it governs what they can discover, invoke, escalate, and egress.
+
 It is deployment-agnostic. On-prem, cloud, hybrid — the specification does not care where the AI runs. It cares where your data is allowed to go and under what conditions.
 
 It is the technical-layer companion to [**ContextOps**](https://github.com/kannanokannan/ContextOps) (organisational governance) and is consumed by [**Sthala**](https://github.com/kannanokannan/Sthala) (sovereign on-prem reference implementation).

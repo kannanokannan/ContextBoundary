@@ -10,6 +10,10 @@ ContextBoundary is one of three sibling open-source projects under github.com/ka
 
 License: Apache 2.0. Status: v0.1 active.
 
+Positioning: ContextBoundary is a policy boundary for AI agents. It governs what agents can discover, invoke, escalate, and egress.
+
+MCP is an integration layer, not the governance authority. ContextBoundary can filter MCP discovery, exposed schemas, invocation permissions, approval requirements, and audit events.
+
 ## Core
 
 - [FRAMEWORK.md](https://github.com/kannanokannan/ContextBoundary/blob/main/FRAMEWORK.md): Core framework specification

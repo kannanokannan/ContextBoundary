@@ -54,6 +54,18 @@ ContextBoundary is not a replacement for these tools. It is the specification la
 
 ---
 
+## Discovery as a Boundary Concern
+
+Agent systems do not only leak data when they call an external endpoint. They also leak capability when they discover what can be called. A tool schema, MCP server listing, database connector, or device endpoint tells an agent what actions exist in the surrounding system. That visibility is itself a boundary event.
+
+Most systems assume discovery flows directly from registry to agent. ContextBoundary inserts a policy boundary between them: registry, boundary, filtered discovery, agent. The agent should only see capabilities that policy allows for its role, trust classification, jurisdiction, and active workload.
+
+MCP remains an integration layer. It standardizes how tools are exposed, but it is not the governance authority. ContextBoundary defines which MCP servers are visible, which tool schemas are exposed, which invocations require approval, which calls are denied, and which events are audited.
+
+This does not require a new framework. Capability accountability belongs in ContextOps: ownership, roles, trust classification, lifecycle, governance metadata, and context source accountability. Boundary enforcement belongs in ContextBoundary: discovery control, capability visibility, invocation control, approval gates, egress control, and audit evidence.
+
+---
+
 ## What ContextBoundary Does Not Claim
 
 ContextBoundary does not claim to solve the hardware sovereignty problem. For most organisations, true hardware sovereignty — control over silicon, firmware, and physical custody — is not achievable in the near term. The framework governs data flows, not chip supply chains.

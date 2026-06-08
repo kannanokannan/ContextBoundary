@@ -118,6 +118,8 @@ ContextBoundary treats discovery and invocation as boundary concerns:
 
 Positioning line: ContextBoundary is a policy boundary for AI agents.
 
+Do not create a separate CapabilityOps framework. Capability accountability belongs in ContextOps; capability visibility, invocation control, approval gates, egress control, and audit evidence belong in ContextBoundary.
+
 ---
 
 ## Key Files

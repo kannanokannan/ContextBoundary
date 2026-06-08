@@ -48,6 +48,7 @@ ContextBoundary is one of three sibling open-source projects. Do not conflate th
 - Sthala is **one vertical implementation** that consumes ContextBoundary's egress contract
 - ContextOps governs the organisational layer; ContextBoundary governs the egress layer
 - All three are Apache 2.0, enterprise-architecture-grade docs
+- Do not create `CapabilityOps`; capability governance is split between ContextOps accountability and ContextBoundary enforcement
 
 ---
 
@@ -117,14 +118,30 @@ contextboundary/
 
 ---
 
-## Files Still on Old Tier Numbering (Parked)
+## Agent and MCP Boundary Rules
 
-These files still use the old tier model. They have NOT been updated yet:
-- `vendor-tier-matrix.md`
-- `boundary-diagram.md`
-- `llms-full.txt`
+MCP is an integration layer, not a governance or authority layer.
 
-When asked to update these, apply egress-centric tier model (Tier I = never leaves, Tier III = explicit API escalation).
+Discovery is a boundary concern. For agents, seeing a capability is already partial access to that capability.
+
+ContextOps owns:
+- ownership
+- roles
+- trust classification
+- lifecycle
+- governance metadata
+- context source accountability
+
+ContextBoundary owns:
+- discovery control
+- capability visibility
+- MCP filtering
+- invocation control
+- approval workflows
+- egress control
+- auditing
+
+Use this positioning carefully: ContextBoundary is a policy boundary for AI agents. Do not make it sound like a runtime product.
 
 ---
 
