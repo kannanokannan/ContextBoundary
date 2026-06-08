@@ -134,6 +134,7 @@ vendors.md             - Vendor catalog
 gdpr.md                - GDPR Audit Profile
 contextops-mapping.md  - ContextOps connector spec
 CONTRIBUTING.md        - Contribution guidelines
+consulting/            - Egress assessment, contract checklist, stakeholder playbook, and executive readout assets
 patterns/              - Runtime, MCP, and local-first wrapper patterns
 examples/policy.yaml   - Sample policy shape
 

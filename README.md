@@ -135,7 +135,7 @@ A CIO reading the canonical diagram against the organisation's current state lan
 
 1. **No defined boundary.** Workloads cross zones without classification or contract review. Intervention: full boundary engagement, starting with Egress Tier classification.
 2. **Boundary defined but leaking.** Some zones classified, but specific crossings are silent. Intervention: targeted audit using the relevant Audit Profile, followed by contract remediation.
-3. **Boundary defined and enforced.** All zones documented, all crossings governed by named instruments, all jurisdictional constraints active. Intervention: maturity certification and ongoing drift monitoring.
+3. **Boundary defined and enforced.** All zones documented, all crossings governed by named instruments, all jurisdictional constraints active. Intervention: maturity assessment and ongoing drift monitoring.
 
 All three are buyable outcomes. ContextBoundary makes the diagnosis legible.
 
@@ -150,6 +150,7 @@ All three are buyable outcomes. ContextBoundary makes the diagnosis legible.
 - ContextOps connector mapping
 - Adoption patterns for runtime boundaries, MCP filtering, and local-first wrappers ([patterns/](./patterns/))
 - Example policy shape for discovery, invocation, approvals, and audit ([examples/policy.yaml](./examples/policy.yaml))
+- Consulting enablement assets for egress assessment, contract review, stakeholder approval, and executive readout ([consulting/](./consulting/))
 
 ---
 
@@ -210,6 +211,13 @@ contextboundary/
 ├── contextops-mapping.md              # Bridge to ContextOps methodology
 ├── llms.txt                           # LLM discoverability summary
 ├── llms-full.txt                      # Full LLM digest
+├── consulting/                        # Repeatable consulting engagement assets
+│   ├── README.md
+│   ├── workshop-agenda.md
+│   ├── egress-assessment.md
+│   ├── cloud-act-contract-checklist.md
+│   ├── stakeholder-playbook.md
+│   └── executive-readout-template.md
 ├── patterns/                          # Adoption and implementation patterns
 │   ├── README.md
 │   ├── runtime-boundary.md
