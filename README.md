@@ -148,6 +148,8 @@ All three are buyable outcomes. ContextBoundary makes the diagnosis legible.
 - One complete Audit Profile: GDPR
 - Endpoint Atlas with starter vendor entries
 - ContextOps connector mapping
+- Adoption patterns for runtime boundaries, MCP filtering, and local-first wrappers ([patterns/](./patterns/))
+- Example policy shape for discovery, invocation, approvals, and audit ([examples/policy.yaml](./examples/policy.yaml))
 
 ---
 
@@ -207,7 +209,15 @@ contextboundary/
 ├── vendors.md                         # Starter vendor registry
 ├── contextops-mapping.md              # Bridge to ContextOps methodology
 ├── llms.txt                           # LLM discoverability summary
-└── llms-full.txt                      # Full LLM digest
+├── llms-full.txt                      # Full LLM digest
+├── patterns/                          # Adoption and implementation patterns
+│   ├── README.md
+│   ├── runtime-boundary.md
+│   ├── mcp-boundary.md
+│   └── local-first-wrapper.md
+└── examples/                          # Concrete sample policy and demo assets
+    ├── README.md
+    └── policy.yaml
 ```
 
 ---

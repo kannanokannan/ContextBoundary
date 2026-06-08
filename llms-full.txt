@@ -134,6 +134,8 @@ vendors.md             - Vendor catalog
 gdpr.md                - GDPR Audit Profile
 contextops-mapping.md  - ContextOps connector spec
 CONTRIBUTING.md        - Contribution guidelines
+patterns/              - Runtime, MCP, and local-first wrapper patterns
+examples/policy.yaml   - Sample policy shape
 
 ---
 

@@ -1,0 +1,47 @@
+# ContextBoundary sample policy
+# Illustrative only. Field names are not a stable implementation API.
+
+policy_version: 0.1
+
+agent:
+  id: FinanceAgent
+  role: finance.readonly
+  trust_level: high
+  domain: finance
+
+context:
+  owner: Finance Architecture
+  audit_profile: GDPR
+  egress_tier_ceiling: Tier II
+
+mcp_visibility:
+  allow:
+    - finance.lookup_invoice
+    - finance.read_vendor_record
+    - audit.read_log
+    - policy.explain_decision
+  approval_required:
+    - finance.export_report
+    - finance.open_case
+  deny:
+    - finance.transfer_funds
+    - finance.update_bank_account
+    - device.unlock
+
+invocation:
+  require_declared_purpose: true
+  require_named_endpoint: true
+  block_tier_i_egress: true
+  allow_tier_iii_per_call_escalation: true
+
+approval:
+  approver_role: FinanceApprover
+  timeout_minutes: 15
+  deny_on_timeout: true
+
+audit:
+  log_discovery: true
+  log_all_invocations: true
+  log_denied_invocations: true
+  sink: customer_worm_storage
+

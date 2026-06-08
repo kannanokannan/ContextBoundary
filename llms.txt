@@ -25,6 +25,8 @@ MCP is an integration layer, not the governance authority. ContextBoundary can f
 - [vendor-tier-matrix.md](https://github.com/kannanokannan/ContextBoundary/blob/main/vendor-tier-matrix.md): Vendor placement across zones
 - [gdpr.md](https://github.com/kannanokannan/ContextBoundary/blob/main/gdpr.md): GDPR jurisdictional audit profile
 - [contextops-mapping.md](https://github.com/kannanokannan/ContextBoundary/blob/main/contextops-mapping.md): Bridge to ContextOps methodology
+- [patterns/](https://github.com/kannanokannan/ContextBoundary/tree/main/patterns): Runtime boundary, MCP boundary, and local-first wrapper patterns
+- [examples/policy.yaml](https://github.com/kannanokannan/ContextBoundary/blob/main/examples/policy.yaml): Sample policy shape for discovery, invocation, approval, and audit
 
 ## Related projects
 
