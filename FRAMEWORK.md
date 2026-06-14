@@ -8,7 +8,7 @@ Version: 0.1 · Read time: ~12 minutes · License: Apache 2.0
 
 ## What is ContextBoundary
 
-ContextBoundary is a vendor-neutral, open-source specification for enterprise AI data egress governance. It gives organizations a structured way to classify outbound data flows, place compute, distribute vendor responsibility, and produce defensible audit evidence across the AI delivery chain.
+ContextBoundary is a vendor-neutral, open-source specification for enterprise AI data egress governance. It gives organizations a structured way to classify outbound data flows, assign boundary zones, distribute vendor responsibility, and produce defensible audit evidence across the AI delivery chain.
 
 The framework operates at the technical layer. It overlays existing infrastructure, gateway, and identity stacks rather than replacing them. It is the technical companion to [ContextOps](https://github.com/kannanokannan/contextops), which operates at the organizational layer.
 
@@ -66,6 +66,8 @@ A single workload classification answers four questions:
 4. **WHAT** legal instrument governs each crossing?
 
 The four-question matrix is the unit of analysis the framework produces. Every Context Asset, every agent, every workload runs through it.
+
+For agent and MCP-connected systems, the same matrix applies before a capability is exposed or invoked. MCP exposes or connects capabilities; ContextBoundary governs whether a capability is visible, callable, approval-required, denied, or constrained by Egress Tier and Audit Profile policy. This makes tool discovery and invocation part of the boundary contract without making ContextBoundary a protocol implementation.
 
 ## The Canonical Boundary Diagram
 
@@ -134,7 +136,7 @@ The bridge is bidirectional:
 
 - ContextBoundary's Egress Tier classification is metadata attached to ContextOps' Context Assets.
 - ContextBoundary's Audit Profile selection is a Curate-stage decision in the ContextOps spine.
-- ContextBoundary's Vendor Tier Responsibility matrix is the technical realization of ContextOps' AI Amplifier Assessment for compute boundaries.
+- ContextBoundary's Vendor Tier Responsibility matrix is the technical realization of ContextOps' AI Amplifier Assessment for vendor-zone boundaries.
 - ContextBoundary's Sovereign Egress logging feeds ContextOps' Renew-stage drift monitoring and Non-Deterministic Triage Protocol.
 
 ContextOps without ContextBoundary leaves technical placement decisions implicit. ContextBoundary without ContextOps leaves organizational ownership of those decisions implicit. Either can be adopted alone. Both gain operational potential when paired.
@@ -155,14 +157,14 @@ ContextBoundary does not own model selection, application design, vendor procure
 
 ## Roots
 
-The patterns named in this framework — tiered privacy classification, hybrid on-prem and cloud deployment, gateway-based egress control, air-gapped sovereign enclaves, federated identity — are documented across enterprise architecture practice, academic research, and vendor blueprints from the past five years.
+The patterns named in this framework — tiered egress classification, hybrid deployment, gateway-based egress control, isolated enclaves, federated identity — are documented across enterprise architecture practice, academic research, and vendor blueprints from the past five years.
 
 The contribution of ContextBoundary is the synthesis of those patterns into a vendor-neutral framework that integrates with organizational governance methodology, treats multi-vendor responsibility as a first-class axis, and remains open and extensible.
 
 ContextBoundary sits on top of:
 
 - Hybrid Privacy-Preserving Large Language Model (HPP-LLM) academic framework
-- Established industry hybrid deployment patterns (cloud-train on-prem-serve, on-prem-anonymize cloud-fine-tune, fully sovereign on-prem)
+- Established industry hybrid deployment patterns for separating training, anonymisation, serving, and controlled external inference
 - Existing AI gateway implementations including open-source and commercial products
 - NIST AI RMF 1.0 risk taxonomy
 - Egress Tier I/II/III classification as documented across regulated industry literature

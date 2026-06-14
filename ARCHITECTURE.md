@@ -4,7 +4,7 @@
 
 ContextBoundary models AI data movement as a five-zone egress chain. The question is not where the software runs. The question is which boundary a payload crosses, which vendor zone receives it, and which Egress Tier permits that crossing.
 
-The framework is deployment-agnostic. The same boundary model applies to on-prem, cloud, hybrid, sovereign regional cloud, and managed-service deployments.
+The framework is deployment-agnostic. The same boundary model applies across customer-operated, managed-service, cloud, hybrid, edge, and regional deployments.
 
 ---
 
@@ -17,6 +17,8 @@ It answers three questions at every outbound boundary:
 1. **Which vendor zone receives the payload?** — Boundary Zone classification
 2. **What egress permission applies?** — Egress Tier I / II / III
 3. **Which obligations govern the crossing?** — Jurisdictional Audit Profile
+
+For agent and MCP-connected systems, the same contract applies before discovery and invocation. A capability may be visible, callable, approval-required, denied, or constrained by Egress Tier and Audit Profile policy. MCP exposes or connects capabilities; ContextBoundary governs the boundary decision around visibility, invocation, approval, denial, egress, and audit.
 
 Without this contract, vendor substitutions and architecture changes silently alter compliance assumptions. With it, every crossing has a declared receiving zone, a permitted Egress Tier, and an auditable obligation set.
 

@@ -113,18 +113,22 @@ ContextBoundary treats discovery and invocation as boundary concerns:
   - Which tools can an agent see?
   - Which schemas can be exposed?
   - Which capabilities can be invoked?
+  - Which capabilities are denied?
   - Which calls require approval?
+  - Which payloads are constrained by Egress Tier and Audit Profile policy?
   - Which egress events must be logged?
 
 Positioning line: ContextBoundary is a policy boundary for AI agents.
 
-Do not create a separate CapabilityOps framework. Capability accountability belongs in ContextOps; capability visibility, invocation control, approval gates, egress control, and audit evidence belong in ContextBoundary.
+Safe MCP framing: MCP exposes or connects capabilities; ContextBoundary governs whether they are visible, callable, approval-required, denied, or egress-constrained. It does not replace MCP or decide where the AI runs.
+
+Do not create a separate CapabilityOps framework. Capability accountability belongs in ContextOps; capability visibility, invocation control, approval gates, denial, egress control, and audit evidence belong in ContextBoundary.
 
 ---
 
 ## Key Files
 
-README.md              - Overview and roadmap
+README.md              - Overview
 FRAMEWORK.md           - Core specification
 ARCHITECTURE.md        - Five-zone egress boundary model
 boundary-diagram.md    - Canonical zone diagram
@@ -135,7 +139,7 @@ gdpr.md                - GDPR Audit Profile
 contextops-mapping.md  - ContextOps connector spec
 CONTRIBUTING.md        - Contribution guidelines
 consulting/            - Egress assessment, contract checklist, stakeholder playbook, and executive readout assets
-patterns/              - Runtime, MCP, and local-first wrapper patterns
+patterns/              - Runtime, MCP, and controlled wrapper deployment patterns
 examples/policy.yaml   - Sample policy shape
 
 ---

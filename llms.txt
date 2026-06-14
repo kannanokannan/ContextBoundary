@@ -12,7 +12,7 @@ License: Apache 2.0. Status: v0.1 active.
 
 Positioning: ContextBoundary is a policy boundary for AI agents. It governs what agents can discover, invoke, escalate, and egress.
 
-MCP is an integration layer, not the governance authority. ContextBoundary can filter MCP discovery, exposed schemas, invocation permissions, approval requirements, and audit events.
+MCP exposes or connects capabilities; ContextBoundary governs whether they are visible, callable, approval-required, denied, or egress-constrained. It can filter MCP discovery, exposed schemas, invocation permissions, approval requirements, denial outcomes, and audit events without replacing MCP.
 
 ## Core
 
@@ -25,7 +25,7 @@ MCP is an integration layer, not the governance authority. ContextBoundary can f
 - [vendor-tier-matrix.md](https://github.com/kannanokannan/ContextBoundary/blob/main/vendor-tier-matrix.md): Vendor placement across zones
 - [gdpr.md](https://github.com/kannanokannan/ContextBoundary/blob/main/gdpr.md): GDPR jurisdictional audit profile
 - [contextops-mapping.md](https://github.com/kannanokannan/ContextBoundary/blob/main/contextops-mapping.md): Bridge to ContextOps methodology
-- [patterns/](https://github.com/kannanokannan/ContextBoundary/tree/main/patterns): Runtime boundary, MCP boundary, and local-first wrapper patterns
+- [patterns/](https://github.com/kannanokannan/ContextBoundary/tree/main/patterns): Runtime boundary, MCP boundary, and controlled wrapper deployment patterns
 - [examples/policy.yaml](https://github.com/kannanokannan/ContextBoundary/blob/main/examples/policy.yaml): Sample policy shape for discovery, invocation, approval, and audit
 - [consulting/](https://github.com/kannanokannan/ContextBoundary/tree/main/consulting): Egress assessment, contract checklist, stakeholder playbook, and executive readout assets
 
@@ -33,4 +33,4 @@ MCP is an integration layer, not the governance authority. ContextBoundary can f
 
 - [context-stack](https://github.com/kannanokannan/context-stack): Canonical terminology, locked decisions, and family framing for all three projects
 - [ContextOps](https://github.com/kannanokannan/ContextOps): Enterprise AI context governance framework
-- [Sthala](https://github.com/kannanokannan/Sthala): Sovereign on-prem AI reference framework
+- [Sthala](https://github.com/kannanokannan/Sthala): Governed runtime reference framework under ContextBoundary's egress contract

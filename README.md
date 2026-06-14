@@ -22,11 +22,11 @@ Full doctrine: https://github.com/kannanokannan/context-stack
 
 ContextBoundary is an open-source specification that defines where AI-processed data is permitted to flow — and where it is not. Every outbound flow is tagged with an Egress Tier and a regulatory jurisdiction before it crosses the boundary, producing a written, auditable, enforceable contract between any AI system and the external services it touches.
 
-ContextBoundary is also a policy boundary for AI agents: it governs what they can discover, invoke, escalate, and egress.
+ContextBoundary is also a policy boundary for AI agents. MCP exposes or connects capabilities; ContextBoundary governs whether those capabilities are visible, callable, approval-required, denied, or constrained by Egress Tier and Audit Profile policy.
 
-It is deployment-agnostic. On-prem, cloud, hybrid — the specification does not care where the AI runs. It cares where your data is allowed to go and under what conditions.
+It is deployment-agnostic. The specification does not decide where the AI runs. It decides where data is allowed to go, which boundary controls apply, and which audit evidence must exist before or after a crossing.
 
-It is the technical-layer companion to [**ContextOps**](https://github.com/kannanokannan/ContextOps) (organisational governance) and is consumed by [**Sthala**](https://github.com/kannanokannan/Sthala) (sovereign on-prem reference implementation).
+It is the technical-layer companion to [**ContextOps**](https://github.com/kannanokannan/ContextOps) (organisational governance) and is consumed by [**Sthala**](https://github.com/kannanokannan/Sthala) (governed runtime reference implementation).
 
 ---
 
@@ -102,7 +102,7 @@ The intersection of all three is the complete boundary picture.
 
 Hyperscaler solutions like AWS Cross-Region Inference and Azure EU Data Boundary provide geographic residency. They do not provide legal sovereignty. US-domiciled corporations remain subject to the CLOUD Act regardless of server location.
 
-ContextBoundary is deployment-agnostic by design. The same specification governs egress whether you run on on-prem hardware, a sovereign regional cloud, or a hyperscaler. The boundary travels with the workload, not the provider.
+ContextBoundary is deployment-agnostic by design. The same specification governs egress across customer-operated, managed-service, cloud, hybrid, edge, and regional deployments. The boundary travels with the workload, not the provider.
 
 ---
 
@@ -148,21 +148,9 @@ All three are buyable outcomes. ContextBoundary makes the diagnosis legible.
 - One complete Audit Profile: GDPR
 - Endpoint Atlas with starter vendor entries
 - ContextOps connector mapping
-- Adoption patterns for runtime boundaries, MCP filtering, and local-first wrappers ([patterns/](./patterns/))
+- Adoption patterns for runtime boundaries, MCP filtering, and controlled wrapper deployments ([patterns/](./patterns/))
 - Example policy shape for discovery, invocation, approvals, and audit ([examples/policy.yaml](./examples/policy.yaml))
 - Consulting enablement assets for egress assessment, contract review, stakeholder approval, and executive readout ([consulting/](./consulting/))
-
----
-
-## Roadmap
-
-v0.2 will add:
-
-- Audit Profiles for India DPDP, RBI sectoral guidelines, HIPAA, SOC2, EU AI Act, LGPD
-- Expanded Endpoint Atlas covering the top 50 enterprise AI vendors and self-hosted equivalents
-- Legacy hardware substrate guidance (existing infrastructure as Tier II / III platform)
-- Worked examples: SMB clinic, mid-market cooperative bank, Indian IT services firm
-- Observability sink protection pattern (regional log sinks, edge redaction)
 
 ---
 
@@ -176,7 +164,7 @@ ContextBoundary is one of three sibling open-source projects:
 | **ContextBoundary** (this repo) | Where is data allowed to go? |
 | [**Sthala**](https://github.com/kannanokannan/Sthala) | Where does the AI actually run? |
 
-ContextOps governs the organisational layer. ContextBoundary governs the egress layer (deployment-agnostic). Sthala is one industry-specific, on-prem implementation that consumes ContextBoundary's contract.
+ContextOps governs the organisational layer. ContextBoundary governs the egress layer. Sthala is a governed runtime reference that consumes ContextBoundary's contract.
 
 ---
 

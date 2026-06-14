@@ -2,6 +2,8 @@
 
 MCP is an integration layer. It standardizes how tools and context sources are exposed to agents. It is not the governance authority.
 
+MCP exposes or connects capabilities; ContextBoundary governs whether those capabilities are visible, callable, approval-required, denied, or constrained by Egress Tier and Audit Profile policy.
+
 ContextBoundary can sit between an MCP registry and an agent, filtering discovery before the agent sees available tools.
 
 ```text
@@ -37,6 +39,7 @@ At invocation time, ContextBoundary asks:
 
 - Can this agent invoke this tool?
 - Is approval required?
+- Should the invocation be denied?
 - What Egress Tier applies to the payload?
 - Is the crossing permitted under the active Audit Profile?
 - What audit event must be emitted?
@@ -63,7 +66,7 @@ All invocations emit audit events
 
 ContextOps owns capability accountability: ownership, roles, trust classification, lifecycle, governance metadata, and context source accountability.
 
-ContextBoundary owns boundary enforcement: discovery control, capability visibility, MCP filtering, invocation control, approval workflows, egress control, and auditing.
+ContextBoundary owns boundary enforcement: discovery control, capability visibility, MCP filtering, invocation control, approval and denial workflows, egress control, and auditing.
 
 Do not create a separate CapabilityOps framework for this split.
 
