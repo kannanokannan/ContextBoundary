@@ -91,8 +91,7 @@ Do NOT anchor ContextBoundary language to:
 
 ## Regulatory Coverage
 
-v0.1 ships with GDPR Audit Profile.
-v0.2 roadmap: DPDP Act, RBI sectoral guidelines, HIPAA, SOC2, EU AI Act, LGPD.
+v0.1 ships with the GDPR Audit Profile. Additional profiles will be added in future versions as the framework matures and field validation informs scope.
 
 ---
 
