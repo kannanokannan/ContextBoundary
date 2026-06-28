@@ -58,7 +58,7 @@ See [tier-classification.md](tier-classification.md) for the full routing rules,
 
 Audit Profiles overlay jurisdiction-specific obligations onto the five-zone model. They do not replace the underlying regulation. They translate regulatory constraints into boundary constraints, metadata requirements, and evidence requirements.
 
-v0.1 ships GDPR as the reference Audit Profile. v0.2 is planned to add DPDP, RBI, HIPAA, SOC2, and EU AI Act profiles.
+v0.1 ships GDPR as the reference Audit Profile. Additional profiles will be added in future versions as the framework matures and field validation informs scope.
 
 ---
 
