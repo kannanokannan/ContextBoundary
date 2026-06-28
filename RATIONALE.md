@@ -1,93 +1,81 @@
-# ContextBoundary — Rationale
+# ContextBoundary Rationale
 
-**The problem is not that organisations are using AI. The problem is that they do not know where their data goes when they do.**
-
----
-
-## The Sovereignty Gap
-
-Most enterprise AI deployments in 2026 share a common architecture: data flows from the organisation into a managed LLM API, inference happens at a vendor's infrastructure, and results return. The organisation retains the output. The vendor retains — for varying durations, under varying contractual terms — everything that crossed the boundary.
-
-This is not a vendor trust problem. It is a boundary visibility problem. Organisations cannot govern what they cannot see, and most have no systematic account of what crosses their AI boundary, under what conditions, or against which regulatory regime.
-
-Hyperscaler solutions offer a partial answer. AWS Cross-Region Inference, Azure EU Data Boundary, and Google Sovereign Cloud each provide geographic data residency — a guarantee that data at rest sits within a defined geography. What they cannot provide is legal data sovereignty. US-domiciled corporations are subject to the CLOUD Act regardless of where their servers sit. A subpoena issued under US federal authority travels to the data, not the data center.
-
-For organisations subject to GDPR, India's DPDP Act, RBI sectoral guidelines, or the EU AI Act, geographic residency is necessary but not sufficient. The question is not just where the data is stored. It is who holds ultimate legal authority over it.
-
-ContextBoundary was built to answer that question — systematically, at the architecture layer, before any data crosses any boundary.
+This document explains the design decisions behind ContextBoundary. It is intended for practitioners who want to understand why the framework is structured as it is, not just what it contains.
 
 ---
 
-## Three Forces Converging in 2026
+## Why a separate specification
 
-**Regulatory hardening.** GDPR enforcement has moved from guidance to prosecution. In 2025 alone, European regulators issued €1.2 billion in GDPR fines — a 22% year-over-year increase. Regulation (EU) 2025/2518, in force since January 2026, streamlines cross-border enforcement with mandatory 15-day investigation deadlines across all Member State Data Protection Authorities. India's DPDP Act operationalised its Data Protection Board in November 2025. The EU AI Act's comprehensive obligations for High-Risk AI systems take effect August 2, 2026, with penalties up to €35 million or 7% of global annual turnover.
+AI data egress is treated as an infrastructure concern in most enterprise deployments. Network policies, cloud region settings, and vendor whitepapers handle individual products. No vendor-neutral specification maps data sensitivity, jurisdictional regulation, and vendor chain responsibility into a single auditable framework.
 
-**Vendor chain complexity.** Enterprise AI does not flow directly from organisation to LLM. It passes through service vendors (AMS providers, system integrators), product vendors (AI platform companies, vertical SaaS), and compute vendors before reaching the model. Each tier sees different data. Each tier holds different contractual accountability. No standard framework named this chain explicitly or defined where accountability transfers at each crossing.
-
-**Legacy infrastructure reality.** Most mid-market enterprises and a large share of regulated organisations operate on existing infrastructure investments. Reference architectures that assume new GPU clusters and new cloud regions do not address the question of how to govern AI workloads running on what already exists.
-
-ContextBoundary addresses all three with a single canonical diagram and a small set of supporting artefacts.
+ContextBoundary fills that gap. It is not a product. It is a specification that sits above existing infrastructure and overlays existing governance frameworks.
 
 ---
 
-## What the Gap Actually Looks Like
+## Why five zones
 
-There is no standard, open-source specification that dynamically tags a network payload at the egress boundary with its specific compliance posture. Enterprise architects are forced to build complex custom middleware to route traffic based on overlapping and sometimes contradictory international laws.
+The five-zone model reflects the actual vendor chain in enterprise AI deployments. Data does not flow directly from customer to LLM. It passes through service vendors (AMS providers, system integrators) and product vendors (AI platform companies, vertical SaaS) before reaching the model.
 
-Existing open-source AI firewalls (Pipelock, LlamaFirewall, Trylon Gateway, WonderwallAi) handle injection defence and PII redaction at the application layer. They do not map flows to specific regulatory jurisdictions. They do not produce an auditable record of which crossing was made under which regulatory basis. They are point defences, not boundary specifications.
+Each zone sees different data. Each zone holds different liabilities. Each crossing is governed by a different legal instrument. Naming the zones explicitly makes the chain legible to architects, procurement teams, legal counsel, and regulators.
 
-ContextBoundary is not a replacement for these tools. It is the specification layer that tells those tools what the boundary is, what data is permitted to cross it, and what must be recorded when it does.
-
----
-
-## Design Decisions
-
-**Deployment-agnostic by necessity.** The egress boundary is a property of the data and the regulatory regime, not of the infrastructure. An organisation running AI on-prem, on a sovereign regional cloud, or on a hyperscaler all face the same question: what is permitted to leave, and under what conditions? The specification must work regardless of deployment model. Sthala is one reference implementation that consumes ContextBoundary's egress contract. It is not the reason the specification exists.
-
-**Egress-centric tier numbering.** Tiers are numbered by restriction, not by data sensitivity category. Tier I is the most restrictive: data never leaves the system. Tier III is the least restrictive: data may egress via explicit per-call API escalation. This numbering is intentional — lower number, higher protection — and consistent with the principle that protective boundaries are the baseline, not the exception.
-
-**Specification over implementation.** ContextBoundary defines what must be true at the boundary. Runtime enforcement is the responsibility of the infrastructure — firewalls, gateways, proxies, and audit pipelines that implement the specification. An existing AI gateway becomes ContextBoundary-compliant when it tags every egress with the tier and regulatory profile, enforces the crossing rules, and emits a verifiable audit trail.
-
-**Regulatory profiles as overlays.** Different regulations define data categories differently. GDPR's special category data, DPDP's sensitive personal data, and HIPAA's PHI are not identical sets. The framework does not attempt to unify these definitions. Instead, Audit Profiles overlay each regulation's specific requirements onto the five-zone canonical diagram. The intersection of the Egress Tier, the jurisdiction, and the vendor zone is the complete picture. v0.1 ships the GDPR Audit Profile. v0.2 adds DPDP, RBI, HIPAA, SOC2, and EU AI Act.
-
-**Observability as a boundary concern.** Centralised logging pipelines are a common, systematically ignored data residency violation. Model outputs and tool-call traces streamed to a global storage bucket constitute cross-border data transfer even when the inference itself is region-pinned. ContextBoundary treats the observability pipeline as a boundary concern, not an engineering afterthought. Regional log sinks and edge prompt redaction are v0.2 targets.
+A three-zone model (customer, cloud, model) loses the AMS/service vendor distinction that matters most in regulated enterprise delivery. A six-zone model adds complexity without adding clarity.
 
 ---
 
-## Discovery as a Boundary Concern
+## Why three Egress Tiers
 
-Agent systems do not only leak data when they call an external endpoint. They also leak capability when they discover what can be called. A tool schema, MCP server listing, database connector, or device endpoint tells an agent what actions exist in the surrounding system. That visibility is itself a boundary event.
+Tier I / II / III maps to three genuinely different governance postures:
 
-Most systems assume discovery flows directly from registry to agent. ContextBoundary inserts a policy boundary between them: registry, boundary, filtered discovery, agent. The agent should only see capabilities that policy allows for its role, trust classification, jurisdiction, and active workload.
+- Tier I data must never leave. No contract, no consent, no business case overrides this.
+- Tier II data may leave only as anonymised aggregates with explicit consent. The transformation (anonymisation) is the control.
+- Tier III data may leave through explicit per-call escalation. The approval mechanism is the control.
 
-MCP remains an integration layer. It standardizes how tools are exposed, but it is not the governance authority. ContextBoundary defines which MCP servers are visible, which tool schemas are exposed, which invocations require approval, which calls are denied, and which events are audited.
+More tiers add precision but reduce adoption. Fewer tiers lose meaningful distinctions. Three tiers cover the full range of enterprise AI data postures without requiring practitioners to memorise a complex taxonomy.
 
-This does not require a new framework. Capability accountability belongs in ContextOps: ownership, roles, trust classification, lifecycle, governance metadata, and context source accountability. Boundary enforcement belongs in ContextBoundary: discovery control, capability visibility, invocation control, approval gates, egress control, and audit evidence.
-
----
-
-## What ContextBoundary Does Not Claim
-
-ContextBoundary does not claim to solve the hardware sovereignty problem. For most organisations, true hardware sovereignty — control over silicon, firmware, and physical custody — is not achievable in the near term. The framework governs data flows, not chip supply chains.
-
-ContextBoundary does not claim to guarantee compliance. Adopting the framework supports a defensible audit posture. It does not certify any deployment or substitute for legal counsel, DPA obligations, or regulatory engagement.
-
-ContextBoundary does not claim that any AI system is safe because it implements the specification. The specification governs where data goes. What happens to data inside an LLM during inference is a separate, active area of research.
+The numbering is egress-centric: lower number = higher protection. This is locked in `context-stack/DECISIONS.md` and must not be inverted.
 
 ---
 
-## The Framework Family
+## Why deployment-agnostic
 
-ContextBoundary answers one question in a family of three:
+ContextBoundary governs data flows, not hardware. Whether the AI runs in a hyperscaler region, a colocation facility, or on-site infrastructure, the same boundary zones and egress tiers apply.
 
-| Project | Question |
-|---------|----------|
-| [ContextOps](https://github.com/kannanokannan/ContextOps) | How does an organisation govern its AI context? |
-| ContextBoundary | Where is data allowed to go? |
-| [Sthala](https://github.com/kannanokannan/Sthala) | Where does the AI actually run? |
-
-The three frameworks are designed to be adopted together but can be adopted independently. ContextBoundary reaches full operational potential when paired with ContextOps' role taxonomy and Context Inventory practices, and when the organisation has answered the infrastructure question that Sthala addresses.
+Anchoring the framework to a specific deployment model (cloud-only, on-prem-only) would exclude the majority of enterprise deployments, which are hybrid. It would also conflate the egress governance question (where may data go?) with the runtime placement question (where does the AI run?), which belongs to Sthala.
 
 ---
 
-*ContextBoundary v0.1. Apache 2.0. Feedback via GitHub Issues.*
+## Why Audit Profiles as overlays
+
+Different regulations define data categories differently. GDPR special category data, DPDP sensitive personal data, and HIPAA PHI are not identical sets. The framework does not attempt to unify these definitions.
+
+Instead, Audit Profiles overlay each regulation's specific requirements onto the five-zone canonical diagram. The intersection of the Egress Tier, the jurisdiction, and the vendor zone is the complete picture. v0.1 ships the GDPR Audit Profile as the reference implementation.
+
+---
+
+## Why observability is a boundary concern
+
+Centralised logging pipelines are a common, systematically ignored data residency issue. Model outputs and tool-call traces streamed to a global storage bucket constitute cross-border data transfer even when the inference itself is region-pinned.
+
+ContextBoundary treats the observability pipeline as a boundary concern, not an engineering afterthought. Regional log sinks and edge prompt redaction belong in the boundary model, not in a separate operations runbook.
+
+---
+
+## Why not a SaaS product
+
+Existing gateways and routers implement parts of this specification. A SaaS product would compete with those implementations rather than enabling them. ContextBoundary is a specification: adopters implement it using the infrastructure they already operate.
+
+---
+
+## Relationship to ContextOps
+
+ContextOps governs the organisational layer: what context an AI agent may use, who owns it, how fresh it must be. ContextBoundary governs the technical layer: where that context is permitted to flow once the AI system starts processing it.
+
+The two frameworks are designed to be adopted together but can be adopted independently. ContextBoundary reaches full operational potential when paired with ContextOps role taxonomy and Context Inventory practices.
+
+---
+
+## Relationship to Sthala
+
+Sthala is a runtime placement reference that consumes ContextBoundary's egress contract. Sthala decides where the AI runs. ContextBoundary decides what data is permitted to leave. They are complementary, not overlapping.
+
+Do not conflate runtime placement decisions (Sthala) with egress governance decisions (ContextBoundary).
