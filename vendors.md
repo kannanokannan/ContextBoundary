@@ -153,6 +153,6 @@ A starter set of representative AI endpoint categories, classified by their defa
 
 ---
 
-🚧 This is a starter set. The v0.2 roadmap expands the Atlas to cover approximately fifty representative endpoints across these categories and adds new categories including agent frameworks, observability platforms, and synthetic data services.
+This is a starter set. The Atlas is designed to be extended by adopters for their specific vendor portfolios.
 
 Contributions of new entries follow the structure defined in the [Atlas README](README.md) and the voice requirements in [CONTRIBUTING.md](../CONTRIBUTING.md).
