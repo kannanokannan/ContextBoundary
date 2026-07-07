@@ -124,6 +124,16 @@ Safe MCP framing: MCP exposes or connects capabilities; ContextBoundary governs 
 
 Do not create a separate CapabilityOps framework. Capability accountability belongs in ContextOps; capability visibility, invocation control, approval gates, denial, egress control, and audit evidence belong in ContextBoundary.
 
+Agent-authority enforcement is defined in agent-authority-enforcement.md:
+  - E1 identity at invocation
+  - E2 autonomy-tier gating
+  - E3 tool supply-chain filtering
+
+Vendor continuity is defined in vendor-continuity.md:
+  - V1 continuity classification
+  - V2 fallback pre-classification
+  - V3 suspension handling
+
 ---
 
 ## Key Files
@@ -131,6 +141,8 @@ Do not create a separate CapabilityOps framework. Capability accountability belo
 README.md              - Overview
 FRAMEWORK.md           - Core specification
 ARCHITECTURE.md        - Five-zone egress boundary model
+agent-authority-enforcement.md - Agent authority runtime controls
+vendor-continuity.md   - Vendor/model availability controls
 boundary-diagram.md    - Canonical zone diagram
 tier-classification.md - Egress Tier definitions
 vendor-tier-matrix.md  - Vendor placements

@@ -20,6 +20,8 @@ MCP exposes or connects capabilities; ContextBoundary governs whether they are v
 - [README.md](https://github.com/kannanokannan/ContextBoundary/blob/main/README.md): Project overview
 - [RATIONALE.md](https://github.com/kannanokannan/ContextBoundary/blob/main/RATIONALE.md): Why this exists — sovereignty gap, CLOUD Act, design decisions
 - [ARCHITECTURE.md](https://github.com/kannanokannan/ContextBoundary/blob/main/ARCHITECTURE.md): Five-zone egress boundary model
+- [agent-authority-enforcement.md](https://github.com/kannanokannan/ContextBoundary/blob/main/agent-authority-enforcement.md): Agent authority runtime controls (E1-E3)
+- [vendor-continuity.md](https://github.com/kannanokannan/ContextBoundary/blob/main/vendor-continuity.md): Vendor/model availability controls (V1-V3)
 - [tier-classification.md](https://github.com/kannanokannan/ContextBoundary/blob/main/tier-classification.md): Egress Tier I / II / III definitions
 - [boundary-diagram.md](https://github.com/kannanokannan/ContextBoundary/blob/main/boundary-diagram.md): Five-zone boundary diagram and zone definitions
 - [vendor-tier-matrix.md](https://github.com/kannanokannan/ContextBoundary/blob/main/vendor-tier-matrix.md): Vendor placement across zones

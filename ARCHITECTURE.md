@@ -20,6 +20,8 @@ It answers three questions at every outbound boundary:
 
 For agent and MCP-connected systems, the same contract applies before discovery and invocation. A capability may be visible, callable, approval-required, denied, or constrained by Egress Tier and Audit Profile policy. MCP exposes or connects capabilities; ContextBoundary governs the boundary decision around visibility, invocation, approval, denial, egress, and audit.
 
+Agent-authority enforcement extends that contract to action crossings. Identity at invocation, autonomy-tier gating, and tool supply-chain filtering are specified in [agent-authority-enforcement.md](agent-authority-enforcement.md).
+
 Without this contract, vendor substitutions and architecture changes silently alter compliance assumptions. With it, every crossing has a declared receiving zone, a permitted Egress Tier, and an auditable obligation set.
 
 ---
@@ -37,6 +39,8 @@ ContextBoundary maps AI data flows across five zones:
 | LLM Vendor | Model inference and generation |
 
 Each vendor in the [Vendor Tier Matrix](vendor-tier-matrix.md) is placed into one of these zones. Each crossing between zones is governed by an Egress Tier, a legal instrument, and any applicable Audit Profile constraints.
+
+Vendor-continuity controls extend this model to availability risk. LLM and Compute Vendor endpoints can carry continuity classification, fallback pre-classification, and suspension-handling evidence as described in [vendor-continuity.md](vendor-continuity.md).
 
 ---
 

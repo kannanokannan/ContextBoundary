@@ -22,7 +22,7 @@ Enterprise AI no longer flows directly from customer to LLM provider. It passes 
 
 Three regulatory pressures compound this complexity:
 
-- GDPR enforcement has intensified after the invalidation of Privacy Shield. Standard Contractual Clauses face renewed scrutiny. The EU AI Act came into staged enforcement through 2025-26.
+- GDPR enforcement has intensified after the invalidation of Privacy Shield. Standard Contractual Clauses face renewed scrutiny. The EU AI Act entered staged enforcement through 2025-26, but its high-risk obligations are subject to the provisional Digital Omnibus revision; current timing may move to December 2027 for standalone systems and August 2028 for embedded systems until formally adopted.
 - India's Digital Personal Data Protection Act is now in active enforcement with the Data Protection Board operational. Sectoral guidelines from RBI on financial data localization have tightened.
 - US healthcare and financial services continue to operate under HIPAA, SOC2, and emerging state-level legislation including Texas TRAIGA, NYDFS Part 500, and Colorado Insurance Law.
 

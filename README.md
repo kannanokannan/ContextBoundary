@@ -148,6 +148,8 @@ All three are buyable outcomes. ContextBoundary makes the diagnosis legible.
 - One complete Audit Profile: GDPR
 - Endpoint Atlas with starter vendor entries
 - ContextOps connector mapping
+- Agent-authority enforcement controls for identity at invocation, autonomy-tier gating, and tool supply-chain filtering ([agent-authority-enforcement.md](./agent-authority-enforcement.md))
+- Vendor-continuity controls for continuity classification, fallback pre-classification, and suspension handling ([vendor-continuity.md](./vendor-continuity.md))
 - Adoption patterns for runtime boundaries, MCP filtering, and controlled wrapper deployments ([patterns/](./patterns/))
 - Example policy shape for discovery, invocation, approvals, and audit ([examples/policy.yaml](./examples/policy.yaml))
 - Consulting enablement assets for egress assessment, contract review, stakeholder approval, and executive readout ([consulting/](./consulting/))
@@ -188,6 +190,8 @@ contextboundary/
 ├── FRAMEWORK.md                       # Core specification
 ├── ARCHITECTURE.md                    # Five-zone egress boundary model
 ├── RATIONALE.md                       # Design rationale and positioning
+├── agent-authority-enforcement.md     # Agent authority runtime controls
+├── vendor-continuity.md               # Vendor/model availability controls
 ├── CLAUDE.md                          # Agent briefing
 ├── LICENSE                            # Apache 2.0
 ├── CONTRIBUTING.md                    # Contribution guidelines
