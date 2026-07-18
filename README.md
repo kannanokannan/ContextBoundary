@@ -32,17 +32,17 @@ It is the technical-layer companion to [**ContextOps**](https://github.com/kanna
 
 ## Why Now
 
-Three deadlines are converging in 2026:
+Regulatory obligations are converging on the 2026–2028 window:
 
-- **EU AI Act** — comprehensive obligations for High-Risk AI systems take effect **August 2, 2026**. Fines up to €35M or 7% of global turnover.
-- **India DPDP Act** — Data Protection Board operational since November 2025. Consent Manager Framework binding by November 2026. Full Data Fiduciary compliance by May 2027.
+- **EU AI Act** — the June 2026 Digital Omnibus amendment deferred High-Risk AI obligations to **December 2, 2027** (standalone Annex III systems) and **August 2, 2028** (AI embedded in Annex I regulated products). Prohibitions and GPAI obligations already apply. Fines up to €35M or 7% of global turnover.
+- **India DPDP Act** — DPDP Rules notified November 2025, legally constituting the Data Protection Board (chair and member appointments underway as of mid-2026). Consent Manager Framework binding by November 2026. Full Data Fiduciary compliance by May 2027.
 - **GDPR cross-border enforcement** — Regulation (EU) 2025/2518 in force since January 2026 with 15-day investigation deadlines. €1.2B in fines issued in 2025 alone.
 
 Existing solutions do not close the gap.
 
-Hyperscaler "data residency" provides geography, not sovereignty — US-domiciled providers remain subject to the CLOUD Act regardless of where their servers sit. Open-source AI firewalls (Pipelock, LlamaFirewall, Trylon Gateway) handle injection defence and PII redaction but do not map flows to specific regulatory tiers. There is no standard, open-source specification that tags a network payload at the egress boundary with its compliance posture.
+Hyperscaler "data residency" provides geography, not sovereignty — US-domiciled providers remain subject to the CLOUD Act regardless of where their servers sit. Open-source AI firewalls (Pipelock, LlamaFirewall, Trylon Gateway) handle injection defence and PII redaction but do not map flows to specific regulatory tiers. For runtime action governance, an open standard now exists — the Cloud Security Alliance's **AARM v1.0** — but AARM is action-authorization-centric: it names data exfiltration as a threat and specifies no data-sensitivity, sovereignty, or vendor-continuity model.
 
-ContextBoundary closes that gap.
+ContextBoundary fills exactly that space: an AARM-aligned specification for the egress side of the boundary.
 
 ---
 
@@ -106,9 +106,20 @@ ContextBoundary is deployment-agnostic by design. The same specification governs
 
 ---
 
+## Alignment with AARM
+
+ContextBoundary positions itself as an **AARM-aligned Core-partial strict-determinism profile**, not a competing category. AARM v1.0 (Cloud Security Alliance Agentic Control Plane Initiative, arXiv:2602.09433) specifies what a runtime control plane for agent actions must do: intercept before execution, evaluate against policy, decide, and record tamper-evident receipts.
+
+- **Architecture:** ContextBoundary's gateway implementation maps to AARM's Protocol Gateway reference architecture.
+- **Profile:** strict determinism - no model in the enforcement path. Where AARM Extended points to probabilistic mechanisms, this profile uses deterministic authorization envelopes and envelope-drift counting. The deviation is documented, not hidden.
+- **Extensions, in the areas AARM leaves open:** Egress Tiers (I/II/III), vendor and jurisdiction zones with Audit Profiles, and vendor-continuity controls (V1-V3). AARM specifies none of these.
+- **Status:** AARM-aligned and Core-partial. Receipts (D4 audit) address the AARM R5 evidence pattern. Remaining Core gaps stay explicit until the evidence package passes review. No AARM approval claim is made.
+
+---
+
 ## Architectural Alignment
 
-ContextBoundary aligns with the architectural patterns the AI security community is converging on:
+ContextBoundary also aligns with the architectural patterns the AI security community is converging on:
 
 - **Context Isolation over in-context guardrails.** The specification assumes the LLM cannot police its own outputs and enforces separation at the network boundary, not inside the prompt.
 - **Agent-External Attestation.** Egress events are designed to be signed and audited by infrastructure outside the agent's trust boundary, not by the agent itself.

@@ -12,7 +12,7 @@ ContextBoundary is a vendor-neutral, open-source specification for enterprise AI
 
 The framework operates at the technical layer. It overlays existing infrastructure, gateway, and identity stacks rather than replacing them. It is the technical companion to [ContextOps](https://github.com/kannanokannan/contextops), which operates at the organizational layer.
 
-ContextBoundary fills a specific gap. Industry literature describes hybrid AI deployment patterns, privacy-preserving inference frameworks, AI gateway implementations, and compliance obligations — but no single vendor-neutral framework ties data sensitivity, jurisdictional regulation, and multi-vendor responsibility together into one architecture an enterprise can adopt.
+ContextBoundary fills a specific gap. For runtime action authorization, the open standard is AARM v1.0 (Cloud Security Alliance) - ContextBoundary aligns with it as a Core-partial strict-determinism profile and maps to its Protocol Gateway architecture. But AARM is action-authorization-centric and specifies no data-sovereignty or vendor-continuity model. Those extensions - Egress Tiers, vendor/jurisdiction zones and Audit Profiles, vendor continuity - are ContextBoundary's contribution.
 
 North Star: the boundary diagram a CIO can read in seconds.
 
@@ -22,8 +22,8 @@ Enterprise AI no longer flows directly from customer to LLM provider. It passes 
 
 Three regulatory pressures compound this complexity:
 
-- GDPR enforcement has intensified after the invalidation of Privacy Shield. Standard Contractual Clauses face renewed scrutiny. The EU AI Act entered staged enforcement through 2025-26, but its high-risk obligations are subject to the provisional Digital Omnibus revision; current timing may move to December 2027 for standalone systems and August 2028 for embedded systems until formally adopted.
-- India's Digital Personal Data Protection Act is now in active enforcement with the Data Protection Board operational. Sectoral guidelines from RBI on financial data localization have tightened.
+- GDPR enforcement has intensified after the invalidation of Privacy Shield. Standard Contractual Clauses face renewed scrutiny. The EU AI Act entered staged enforcement through 2025-26; the Digital Omnibus amendment (formally adopted June 2026) deferred high-risk obligations to December 2, 2027 for standalone Annex III systems and August 2, 2028 for AI embedded in Annex I regulated products.
+- India's Digital Personal Data Protection Act is in phased enforcement: DPDP Rules notified November 2025 legally constituted the Data Protection Board, though chair and member appointments were still in progress as of mid-2026; most fiduciary obligations phase in through mid-2027. Sectoral guidelines from RBI on financial data localization have tightened.
 - US healthcare and financial services continue to operate under HIPAA, SOC2, and emerging state-level legislation including Texas TRAIGA, NYDFS Part 500, and Colorado Insurance Law.
 
 Most regulated enterprises now answer to two or three regulators simultaneously. Vendor whitepapers cover their own products. Academic frameworks remain unimplemented. Compliance documents specify obligations but not architecture. ContextBoundary fills the methodology gap between these.

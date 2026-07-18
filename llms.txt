@@ -10,7 +10,7 @@ ContextBoundary is one of three sibling open-source projects under github.com/ka
 
 License: Apache 2.0. Status: v0.1 active.
 
-Positioning: ContextBoundary is a policy boundary for AI agents. It governs what agents can discover, invoke, escalate, and egress.
+Positioning: ContextBoundary is a policy boundary for AI agents. It governs what agents can discover, invoke, escalate, and egress. It is an AARM-aligned Core-partial strict-determinism profile (AARM v1.0, Cloud Security Alliance, arXiv:2602.09433; Protocol Gateway architecture), extending AARM in the areas it leaves open: Egress Tiers, vendor/jurisdiction zones, and vendor continuity. No AARM approval claim is made until evidence review passes.
 
 MCP exposes or connects capabilities; ContextBoundary governs whether they are visible, callable, approval-required, denied, or egress-constrained. It can filter MCP discovery, exposed schemas, invocation permissions, approval requirements, denial outcomes, and audit events without replacing MCP.
 
