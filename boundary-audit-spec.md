@@ -105,7 +105,7 @@ Given an intact log + the policy whose hash == events' `policy_hash`:
 
 A conformant sink preserves per-session ordering, exact values, chain fields verbatim, seal + tombstone durability; must not reorder/coalesce/drop events or mutate canonical hashes.
 - **Profile A — JSONL (reference, harness target):** one envelope/line, append-only, per session. System of record.
-- **Profile B — Workers Analytics Engine (parked, roadmap #7):** map bands to blobs/doubles/indexes. Caveat to validate on unpark: AE samples/aggregates and may not retain every event losslessly — if so it **cannot be the sole sink**; treat as a queryable mirror with JSONL (or equivalent durable append-only sink) as the system of record.
+- **Profile B — Workers Analytics Engine:** map bands to blobs/doubles/indexes. Because AE samples/aggregates and may not retain every event losslessly, it **cannot be the sole sink**; it serves as a queryable mirror with JSONL (or an equivalent durable append-only sink) as the system of record.
 
 ## 8. Conformance impact (supersedes provisional S-AUD-02)
 
@@ -115,7 +115,7 @@ A conformant sink preserves per-session ordering, exact values, chain fields ver
 - **S-AUD-04** (tamper): alter a field in a sealed log without re-signing → `event_altered` / `seal_invalid`.
 - **S-AUD-05** (policy substitution): verify intact log vs a different policy → `policy_substituted` / `log_policy_divergence`.
 - **S-AUD-06** (expiry ≠ suppression): a deleted expired session with a valid tombstone verifies as lawful; the same session with events gone and no tombstone → `gap_detected`.
-Adds 4 scenarios (21 → 25). Roadmap #4 folds into the conformance doc; #5 wires them.
+Adds 4 scenarios (21 → 25).
 
 ## 9. Decisions — RATIFIED 2026-07-10
 - **DA-1 hash algorithm:** default SHA-256, **pluggable + self-describing** (`hash_alg` recorded per event). Old logs stay verifiable after defaults change. (Kannan: framework must be configurable, not hardcoded.)
