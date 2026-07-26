@@ -12,7 +12,7 @@ ContextBoundary is a vendor-neutral, open-source specification for enterprise AI
 
 The framework operates at the technical layer. It overlays existing infrastructure, gateway, and identity stacks rather than replacing them. It is the technical companion to [ContextOps](https://github.com/kannanokannan/contextops), which operates at the organizational layer.
 
-ContextBoundary fills a specific gap. For runtime action authorization, the open standard is AARM v1.0 (Cloud Security Alliance) - ContextBoundary aligns with it as a Core-partial strict-determinism profile and maps to its Protocol Gateway architecture. But AARM is action-authorization-centric and specifies no data-sovereignty or vendor-continuity model. Those extensions - Egress Tiers, vendor/jurisdiction zones and Audit Profiles, vendor continuity - are ContextBoundary's contribution.
+ContextBoundary fills a specific gap. For runtime action authorization, the open standard is AARM v1.0 (Cloud Security Alliance). ContextBoundary maps to its Protocol Gateway architecture as an AARM-aligned strict-determinism profile: all Core requirements (R1–R6) are implemented and CI-verified, while independent conformance review has not yet been undertaken. R7 is a designed deterministic divergence using envelope-drift counting, and R8 OpenTelemetry export is implemented. The reference gateway is verifiable from a clean clone; production deployment remains pending. But AARM is action-authorization-centric and specifies no data-sovereignty or vendor-continuity model. Those extensions - Egress Tiers, vendor/jurisdiction zones and Audit Profiles, vendor continuity - are ContextBoundary's contribution. Production operation and independent CSA TWG evidence review remain required before any AARM conformance claim.
 
 North Star: the boundary diagram a CIO can read in seconds.
 
@@ -149,7 +149,7 @@ A CIO reading the canonical diagram against the organisation's current state lan
 
 **Boundary defined but leaking.** Some zones classified, but specific crossings are silent — data flows between zones without explicit instruments. Intervention: targeted audit using the relevant Audit Profile, followed by contract remediation.
 
-**Boundary defined and enforced.** All zones documented, all crossings governed by named instruments, all jurisdictional constraints active. Intervention: maturity certification and ongoing drift monitoring.
+**Boundary defined and enforced.** All zones documented, all crossings governed by named instruments, all jurisdictional constraints active. Intervention: maturity assessment and ongoing drift monitoring.
 
 ## What ContextBoundary Is Not
 

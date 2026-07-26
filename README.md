@@ -108,12 +108,12 @@ ContextBoundary is deployment-agnostic by design. The same specification governs
 
 ## Alignment with AARM
 
-ContextBoundary positions itself as an **AARM-aligned Core-partial strict-determinism profile**, not a competing category. AARM v1.0 (Cloud Security Alliance Agentic Control Plane Initiative, arXiv:2602.09433) specifies what a runtime control plane for agent actions must do: intercept before execution, evaluate against policy, decide, and record tamper-evident receipts.
+ContextBoundary positions itself as an **AARM-aligned strict-determinism profile — all Core requirements (R1–R6) implemented and CI-verified; independent conformance review not yet undertaken.** It is not a competing category. AARM v1.0 (Cloud Security Alliance Agentic Control Plane Initiative, arXiv:2602.09433) specifies what a runtime control plane for agent actions must do: intercept before execution, evaluate against policy, decide, and record tamper-evident receipts.
 
 - **Architecture:** ContextBoundary's gateway implementation maps to AARM's Protocol Gateway reference architecture.
 - **Profile:** strict determinism - no model in the enforcement path. Where AARM Extended points to probabilistic mechanisms, this profile uses deterministic authorization envelopes and envelope-drift counting. The deviation is documented, not hidden.
 - **Extensions, in the areas AARM leaves open:** Egress Tiers (I/II/III), vendor and jurisdiction zones with Audit Profiles, and vendor-continuity controls (V1-V3). AARM specifies none of these.
-- **Status:** AARM-aligned and Core-partial. The gateway implementation now covers R1-R6, including R2/R3 owner-declared intent envelopes, R4 deterministic MODIFY and DEFER outcomes, and R6 Ed25519 agent-key signatures with public-key-verifiable receipt seals; the R8 OpenTelemetry binding is also present. Production operation and external evidence review remain required before any conformance claim. R6 proves the registered agent key signed an action, not the human principal behind it. No AARM conformance or approval claim is made.
+- **Status:** R1–R6 are implemented and CI-verified: transparent interception; owner-declared session context and intent envelopes; deterministic policy evaluation against those envelopes; all five decisions (ALLOW, DENY, STEP_UP, MODIFY, DEFER); tamper-evident receipts; and per-agent Ed25519 identity binding. R7 is a designed deterministic divergence using envelope-drift counting, and R8 OpenTelemetry export is implemented. The reference gateway is verifiable from a clean clone; production deployment remains pending. R6 proves that the registered agent key signed an action, not the human principal behind it. Production operation and independent CSA TWG evidence review remain required before any AARM conformance claim. No AARM approval claim is made.
 
 ---
 
@@ -125,7 +125,7 @@ ContextBoundary also aligns with the architectural patterns the AI security comm
 - **Agent-External Attestation.** Egress events are designed to be signed and audited by infrastructure outside the agent's trust boundary, not by the agent itself.
 - **Rule of Two compatibility.** Tier classification maps directly to Simon Willison's framing — Tier I prevents agents from combining untrusted input, private data, and external state.
 
-ContextBoundary is the specification. Runtime products (firewalls, gateways, proxies) implement it. An existing AI firewall becomes ContextBoundary-compliant when it tags every egress with the tier + regulation schema and emits a verifiable audit trail.
+ContextBoundary is the specification. Runtime products (firewalls, gateways, proxies) implement it. An existing AI firewall can implement the ContextBoundary boundary pattern by tagging every egress with the tier + regulation schema and emitting a verifiable audit trail.
 
 ---
 
