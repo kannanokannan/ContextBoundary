@@ -1,5 +1,7 @@
 # AARM v1.0 Conformance Gap-Analysis (roadmap #1)
 
+> **Implementation update — 2026-07-26.** This is the operative status for the gateway implementation and supersedes the earlier pre-v1.1 gap statements below: R2 session context and R3 owner-declared intent envelopes are implemented, as is R6 per-agent Ed25519 identity binding with Ed25519 gateway seals and public-keys-only verification. The implementation proves that the key registered to an agent signed an action; it does not establish the human principal behind the agent. R4 MODIFY and DEFER, production operation, and external evidence review remain outstanding. The claim ceiling is unchanged: **AARM-aligned, Core-partial, strict-determinism profile** — no AARM conformance or approval claim.
+
 **Where ContextBoundary stands against the standard we've decided to conform to (D-04).**
 Version 1.0 (2026-07-11) · Author: Chanakya · Source: AARM v1.0 (CSA TWG, Errico, Feb 2026, arXiv:2602.09433, CC BY 4.0), archived at references/aarm/2026-07-11_aarm.dev_spec_v1.0.txt
 Status: ratified 2026-07-17 (D-05): deterministic R3 reading accepted; v1.0 ships as Core-partial + strict-determinism profile, full Core at v1.1; egress-sovereignty and vendor-continuity confirmed as profile extensions. Feeds the positioning doc (#2), the novelty scrub (#3), and the threat model (#4).
