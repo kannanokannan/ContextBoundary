@@ -113,7 +113,7 @@ ContextBoundary positions itself as an **AARM-aligned Core-partial strict-determ
 - **Architecture:** ContextBoundary's gateway implementation maps to AARM's Protocol Gateway reference architecture.
 - **Profile:** strict determinism - no model in the enforcement path. Where AARM Extended points to probabilistic mechanisms, this profile uses deterministic authorization envelopes and envelope-drift counting. The deviation is documented, not hidden.
 - **Extensions, in the areas AARM leaves open:** Egress Tiers (I/II/III), vendor and jurisdiction zones with Audit Profiles, and vendor-continuity controls (V1-V3). AARM specifies none of these.
-- **Status:** AARM-aligned and Core-partial. The gateway implementation includes R2/R3 owner-declared intent envelopes and R6 Ed25519 agent-key signatures plus public-key-verifiable receipt seals; R4 MODIFY and DEFER, production operation, and evidence review remain open. R6 proves the registered agent key signed an action, not the human principal behind it. No AARM conformance or approval claim is made.
+- **Status:** AARM-aligned and Core-partial. The gateway implementation now covers R1-R6, including R2/R3 owner-declared intent envelopes, R4 deterministic MODIFY and DEFER outcomes, and R6 Ed25519 agent-key signatures with public-key-verifiable receipt seals; the R8 OpenTelemetry binding is also present. Production operation and external evidence review remain required before any conformance claim. R6 proves the registered agent key signed an action, not the human principal behind it. No AARM conformance or approval claim is made.
 
 ---
 

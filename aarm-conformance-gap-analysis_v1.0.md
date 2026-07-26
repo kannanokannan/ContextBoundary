@@ -1,5 +1,7 @@
 # AARM v1.0 Conformance Gap-Analysis (roadmap #1)
 
+> **Implementation update — 2026-07-26 (R4/R8).** This supersedes the earlier implementation update below where they differ: the gateway now implements R4's deterministic, allowlisted MODIFY and durable condition-gated DEFER outcomes, and the non-authoritative R8 OpenTelemetry binding. The R1-R6 implementation mechanism is complete, but the public ceiling remains **AARM-aligned, Core-partial, strict-determinism profile** pending production operation and external evidence review. No conformance or approval claim is made.
+
 > **Implementation update — 2026-07-26.** This is the operative status for the gateway implementation and supersedes the earlier pre-v1.1 gap statements below: R2 session context and R3 owner-declared intent envelopes are implemented, as is R6 per-agent Ed25519 identity binding with Ed25519 gateway seals and public-keys-only verification. The implementation proves that the key registered to an agent signed an action; it does not establish the human principal behind the agent. R4 MODIFY and DEFER, production operation, and external evidence review remain outstanding. The claim ceiling is unchanged: **AARM-aligned, Core-partial, strict-determinism profile** — no AARM conformance or approval claim.
 
 **Where ContextBoundary stands against the standard we've decided to conform to (D-04).**
