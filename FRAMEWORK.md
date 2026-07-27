@@ -151,6 +151,8 @@ A CIO reading the canonical diagram against the organisation's current state lan
 
 **Boundary defined and enforced.** All zones documented, all crossings governed by named instruments, all jurisdictional constraints active. Intervention: maturity assessment and ongoing drift monitoring.
 
+Adopters can use the [runtime maturity ladder](./maturity-ladder.md) to describe the configuration state of an enforcement point alongside this adoption path. It is a runtime-side axis, orthogonal to the ContextOps organizational levels, and shows what each configured step adds.
+
 ## What ContextBoundary Is Not
 
 - Not a SaaS product, gateway, or tool. Existing gateways and routers implement parts of the framework.

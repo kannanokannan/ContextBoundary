@@ -70,6 +70,8 @@ ContextOps defines a five-level maturity model. ContextBoundary alignment per le
 
 ContextBoundary practices align to ContextOps Level 2 and above, consistent with ContextOps' own gate rule. Below Level 2, technical boundary work without organizational discipline produces architecture documents that no one maintains.
 
+The [runtime maturity ladder](./maturity-ladder.md) is the runtime-side axis of that gate rule: ContextOps Level 2 is prerequisite for runtime Level 2 and above.
+
 ## Spine Stage Coverage
 
 Mapping ContextBoundary activities to the ContextOps four-stage spine:

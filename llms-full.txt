@@ -149,6 +149,7 @@ vendor-tier-matrix.md  - Vendor placements
 vendors.md             - Vendor catalog
 gdpr.md                - GDPR Audit Profile
 contextops-mapping.md  - ContextOps connector spec
+maturity-ladder.md     - Runtime-side maturity ladder for enforcement-point configuration
 CONTRIBUTING.md        - Contribution guidelines
 consulting/            - Egress assessment, contract checklist, stakeholder playbook, and executive readout assets
 patterns/              - Runtime, MCP, and controlled wrapper deployment patterns

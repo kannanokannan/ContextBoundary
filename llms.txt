@@ -27,6 +27,7 @@ MCP exposes or connects capabilities; ContextBoundary governs whether they are v
 - [vendor-tier-matrix.md](https://github.com/kannanokannan/ContextBoundary/blob/main/vendor-tier-matrix.md): Vendor placement across zones
 - [gdpr.md](https://github.com/kannanokannan/ContextBoundary/blob/main/gdpr.md): GDPR jurisdictional audit profile
 - [contextops-mapping.md](https://github.com/kannanokannan/ContextBoundary/blob/main/contextops-mapping.md): Bridge to ContextOps methodology
+- [maturity-ladder.md](https://github.com/kannanokannan/ContextBoundary/blob/main/maturity-ladder.md): Runtime-side maturity ladder for enforcement-point configuration
 - [patterns/](https://github.com/kannanokannan/ContextBoundary/tree/main/patterns): Runtime boundary, MCP boundary, and controlled wrapper deployment patterns
 - [examples/policy.yaml](https://github.com/kannanokannan/ContextBoundary/blob/main/examples/policy.yaml): Sample policy shape for discovery, invocation, approval, and audit
 - [consulting/](https://github.com/kannanokannan/ContextBoundary/tree/main/consulting): Egress assessment, contract checklist, stakeholder playbook, and executive readout assets

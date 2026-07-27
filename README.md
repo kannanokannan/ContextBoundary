@@ -212,6 +212,7 @@ contextboundary/
 ├── gdpr.md                            # GDPR profile (v0.1 reference)
 ├── vendors.md                         # Starter vendor registry
 ├── contextops-mapping.md              # Bridge to ContextOps methodology
+├── maturity-ladder.md                 # Runtime-side maturity ladder for enforcement-point configuration
 ├── llms.txt                           # LLM discoverability summary
 ├── llms-full.txt                      # Full LLM digest
 ├── consulting/                        # Repeatable consulting engagement assets
