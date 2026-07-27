@@ -47,4 +47,4 @@ No new axis is introduced. Agent authority is enforced through the three control
 
 ## Changelog
 
-- **2026-07-06** — v0.1 created. Three runtime controls (E1 identity-at-invocation, E2 autonomy-tier gating, E3 tool supply-chain filtering) specified and mapped to existing ContextBoundary concepts. Authored by Chanakya; registered by Hanuman in `README.md`, `llms.txt`, `llms-full.txt`, and `ARCHITECTURE.md`.
+- **2026-07-06** — v0.1 created. Three runtime controls (E1 identity-at-invocation, E2 autonomy-tier gating, E3 tool supply-chain filtering) specified and mapped to existing ContextBoundary concepts. Registered in `README.md`, `llms.txt`, `llms-full.txt`, and `ARCHITECTURE.md`.

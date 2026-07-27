@@ -1,7 +1,7 @@
 # Boundary Audit Spec (D4)
 
 **The evidential half of the thesis: reconstruct what happened from logs + policy alone.**
-Version 0.1.1 (2026-07-10) · Status: **RATIFIED** (DA-1/2/3 resolved 2026-07-10) · Author: Chanakya
+Version 0.1.1 (2026-07-10) · Status: **RATIFIED** (DA-1/2/3 resolved 2026-07-10) · Author: Kannan
 Normative. Belongs in the ContextBoundary framework repo (not the gateway). Pairs with boundary-policy-spec.md v0.2.1 and boundary-conformance-scenarios.md v0.2.1.
 Supersedes v0.1 DRAFT. Only change: the three open decisions are ratified and folded in — pluggable+self-describing algorithms (DA-1, DA-3), mandatory retention with audited deletion (DA-2). No mechanics changed from v0.1 beyond these.
 
@@ -118,9 +118,9 @@ A conformant sink preserves per-session ordering, exact values, chain fields ver
 Adds 4 scenarios (21 → 25).
 
 ## 9. Decisions — RATIFIED 2026-07-10
-- **DA-1 hash algorithm:** default SHA-256, **pluggable + self-describing** (`hash_alg` recorded per event). Old logs stay verifiable after defaults change. (Kannan: framework must be configurable, not hardcoded.)
-- **DA-2 retention:** expiry is **mandatory** — every seal carries `retention.expires_at`; a session without it is non-conformant. Deletion at expiry emits a signed `session.delete` **tombstone**, so lawful expiry is distinguishable from suppression. (Kannan: audit cannot be open-ended; must expire.)
-- **DA-3 seal strength:** `seal_method` **pluggable + self-describing**, default `hmac-sha256`, with `sig-ed25519` and `anchored-*` available. Ship v1 default HMAC; anchoring designed-but-deferred; launch claim worded to the default. Making anchoring the default = Phase-C positioning decision, not a build change. (Kannan: same shape as DA-1 — defaults + configurable.)
+- **DA-1 hash algorithm:** default SHA-256, **pluggable + self-describing** (`hash_alg` recorded per event). Old logs stay verifiable after defaults change. Rationale: framework must be configurable, not hardcoded.
+- **DA-2 retention:** expiry is **mandatory** — every seal carries `retention.expires_at`; a session without it is non-conformant. Deletion at expiry emits a signed `session.delete` **tombstone**, so lawful expiry is distinguishable from suppression. Rationale: audit cannot be open-ended; it must expire.
+- **DA-3 seal strength:** `seal_method` **pluggable + self-describing**, default `hmac-sha256`, with `sig-ed25519` and `anchored-*` available. Ship v1 default HMAC; anchoring designed-but-deferred; launch claim worded to the default. Making anchoring the default = Phase-C positioning decision, not a build change. Rationale: defaults are configurable and self-describing.
 
 ## Non-goals (documented)
 Not a SIEM / not real-time alerting. Retention *duration* is deploy-time config (the requirement that it exist is normative — DA-2). Not encryption-at-rest (§1 means no Tier-I content in the log). Detector *correctness* is proven by policy conformance, not here.

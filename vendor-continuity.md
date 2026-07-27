@@ -59,4 +59,4 @@ Export and availability exposure is a moving target. As of mid-2026 the EU AI Ac
 
 ## Changelog
 
-- **2026-07-06** — v0.1 created. Vendor/model availability control (V1 continuity classification, V2 fallback pre-classification, V3 suspension handling) specified, prompted by the June 2026 frontier-model export suspension, and mapped to the Endpoint Atlas and Vendor Tier axis. EU AI Act timing note updated to reflect the provisional Digital Omnibus revision. Authored by Chanakya; registered by Hanuman in the public index files.
+- **2026-07-06** — v0.1 created. Vendor/model availability control (V1 continuity classification, V2 fallback pre-classification, V3 suspension handling) specified, prompted by the June 2026 frontier-model export suspension, and mapped to the Endpoint Atlas and Vendor Tier axis. EU AI Act timing note updated to reflect the provisional Digital Omnibus revision. Registered in the public index files.

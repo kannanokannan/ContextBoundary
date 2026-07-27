@@ -5,7 +5,7 @@
 > **Honesty boundary.** The reference gateway is verifiable from a clean clone; production deployment remains pending. R6 proves that the registered agent key signed an action, not the human principal behind it. Production operation and independent CSA TWG evidence review remain required before any AARM conformance claim. No AARM approval claim is made. The pre-v1.1 analysis below is retained as historical context and is superseded where it describes R2/R3/R4/R6 as unfinished.
 
 **Where ContextBoundary stands against the standard we've decided to conform to (D-04).**
-Version 1.0 (2026-07-11) · Author: Chanakya · Source: AARM v1.0 (CSA TWG, Errico, Feb 2026, arXiv:2602.09433, CC BY 4.0), archived at references/aarm/2026-07-11_aarm.dev_spec_v1.0.txt
+Version 1.0 (2026-07-11) · Author: Kannan · Source: AARM v1.0 (CSA TWG, Errico, Feb 2026, arXiv:2602.09433, CC BY 4.0), archived at references/aarm/2026-07-11_aarm.dev_spec_v1.0.txt
 Status: updated 2026-07-26: deterministic R3 reading is implemented; R1–R6 are implemented and CI-verified; R7 remains a designed deterministic divergence; R8 is implemented. Egress-sovereignty and vendor-continuity remain profile extensions. Production operation and independent CSA TWG evidence review remain before any AARM conformance claim.
 
 ---

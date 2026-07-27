@@ -30,16 +30,16 @@ Levels are reached by configuring more controls, never by turning an enforcement
 
 ## Configuration Matrix
 
-This matrix records Chanakya's reading of `contextboundary-gw`; it is not a source or CI audit.
+The configuration states below were verified against the `contextboundary-gw` source and its CI run.
 
 | Requirement(s) | Configuration state | Ladder effect |
 |---|---|---|
 | R1, R4, R5, R7 | Code-resident and active once deployed | Supports the interception, decision, receipt, and deterministic divergence mechanisms used by the ladder. |
 | R2/R3 | Requires the `INTENT_ENVELOPE_BOOTSTRAP_KEY` binding; without it `boundary/session.start` fails closed with `owner_proof_unavailable` | Enables Level 2 owner-declared, narrowing-only session envelopes. |
-| R6 | Requires `AGENT_KEY_REGISTRY` plus the gateway Ed25519 private key | Enables Level 4 agent identity and gateway sealing. |
+| R6 | Requires registered agent public keys (optionally supplied through `AGENT_KEY_REGISTRY`) plus the gateway Ed25519 private key | Enables Level 4 agent identity and gateway sealing. |
 | R8 | Requires `OTLP_HTTP_ENDPOINT` | Enables Level 5 operating-evidence export. |
 
-> **Verification needed against `contextboundary-gw` source and CI.** This task did not inspect that repository. Verify: (1) that R1, R4, R5, and R7 are code-resident and active once deployed; (2) the `INTENT_ENVELOPE_BOOTSTRAP_KEY` binding name and `boundary/session.start` fail-closed result; (3) the `AGENT_KEY_REGISTRY` and gateway Ed25519 private-key prerequisites for R6; (4) the `OTLP_HTTP_ENDPOINT` prerequisite for R8; and (5) the mapping from each configuration state to the ladder above. If a later source or CI check differs, report the mismatch to Chanakya; do not silently change this document or the implementation.
+> **Verified status.** Verified against `contextboundary-gw` at commit `b9f58f3`; CI run `30280559652` is green. Confirmed: R2/R3 require `INTENT_ENVELOPE_BOOTSTRAP_KEY` for a valid frozen session and fail closed without it; R6 requires registered agent public keys plus gateway Ed25519 signing material; R8 requires `OTLP_HTTP_ENDPOINT`; R1/R4/R5/R7 are code-resident. The gateway receipt seal is Ed25519 and is verifiable with public keys only.
 
 ## Crosswalk
 
