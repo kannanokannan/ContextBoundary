@@ -4,12 +4,12 @@
 Version 0.2.1 (2026-07-09) · Engine-agnostic (tests outcomes, not OPA) · Pairs with boundary-policy-spec.md
 Author: Kannan · Runs on the conformance harness: `npm test -- --target <gateway-url>`
 
-Each scenario: GIVEN (policy + identity + action) → EXPECT (decision + audit). A gateway conforms iff all pass. Adversarial scenarios (☆) put the attack inside prompts/tool-results — model assumed compromised; boundary must hold anyway.
+Each scenario: GIVEN (policy + identity + action) → EXPECT (decision + audit). The policy is bound by deployment, not supplied per request — the harness verifies it by asserting audit.policy_hash against the compiled policy artifact. A gateway conforms iff all pass under a declared policy hash. Adversarial scenarios (☆) put the attack inside prompts/tool-results — model assumed compromised; boundary must hold anyway.
 
 **v0.2.1 changes over the v0.1 build currently in the repo:**
 1. **Egress tier direction corrected to canon** (Tier I most restrictive). read-secrets is now Tier I; R4 scenarios relabelled; detector escalates toward Tier I.
-2. **S-R4-03: xfail → must-pass.** With the ratified hybrid egress model (declared floor + escalate-only detectors), the hidden secret is caught by det:credential-pattern. **0 xfail remain — all 21 are must-pass.**
-3. **Count corrected 20 → 21** (R1×3, R2×4, R3×5, R4×3, R5×4, AUD×2). D3 criterion ≥20 satisfied.
+2. **S-R4-03: xfail → must-pass.** With the ratified hybrid egress model (declared floor + escalate-only detectors), the hidden secret is caught by det:credential-pattern. **0 xfail remain — all 22 are must-pass.**
+3. **Count corrected 21 → 22** (R1×3, R2×4, R3×5, R4×4, R5×4, AUD×2). D3 criterion ≥20 satisfied.
 4. **Ambiguity locks** (from harness implementation review #3–#7) folded into the fixtures/expectations below.
 
 ---
@@ -109,7 +109,7 @@ Harness note for S-R4-03: three-part assertion — decision deny, rule_id R4 / r
 | RQ5 continuity | S-R5-01/02/03/04 |
 
 ## Notes
-- 21 scenarios, 5 adversarial (☆), **0 expected-fail**.
+- 22 scenarios, 5 adversarial (☆), **0 expected-fail**.
 - Engine note (D-03): Rego returns allow/deny + obligations; harness asserts our vocabulary (allow/deny/approve) + rule_id + detector_id, so scenarios are unchanged by the engine choice.
 - Detector scope: S-R4-03 tests exactly one enumerated detector. A secret matching no enumerated pattern passing through is a *documented* limitation (spec §3.7 non-goal), not a conformance failure.
 
