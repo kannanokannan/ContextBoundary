@@ -2,6 +2,8 @@
 
 This checklist helps consultants review whether vendor contracts support the technical boundary described by ContextBoundary. It is a technical and architectural risk tool, not legal advice.
 
+> Claim limits for all consulting material are in [README.md](README.md). Read them before client use.
+
 Use it with legal counsel, procurement, security, privacy, and enterprise architecture.
 
 ## Core Question

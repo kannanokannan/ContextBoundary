@@ -2,6 +2,8 @@
 
 The Discovery Workshop is the first consulting engagement in a ContextBoundary assessment. Its purpose is to make the current AI boundary visible before scoring, contract review, or remediation planning.
 
+> Claim limits for all consulting material are in [README.md](README.md). Read them before client use.
+
 ## Participants
 
 Recommended participants:

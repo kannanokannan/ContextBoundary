@@ -12,6 +12,12 @@ The ContextBoundary Egress Assessment converts boundary visibility into a maturi
 | 4 | Enforced | Discovery, invocation, egress, approval, and audit controls are implemented consistently. |
 | 5 | Optimizing | Boundary telemetry drives continuous drift detection, vendor governance, and procurement decisions. |
 
+This 1-5 model scores organizational maturity. That axis is owned by [ContextOps Levels 1-5](https://github.com/kannanokannan/ContextOps).
+
+A separate, orthogonal runtime axis exists; see [`maturity-ladder.md`](../maturity-ladder.md). It describes the configuration state of the enforcement point, not the organization.
+
+A client can score high on one axis and Level 0 on the other. Report the two axes separately; do not average them.
+
 ## Scoring Categories
 
 Score each category from 1 to 5.
@@ -50,4 +56,6 @@ A completed assessment should produce:
 ## Interpretation
 
 The maturity score is a planning instrument. It is not a compliance rating, security certification, or legal conclusion.
+
+Claim statements for this consulting package are maintained in [README.md](README.md).
 

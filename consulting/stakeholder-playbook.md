@@ -4,6 +4,8 @@ The Stakeholder Approval Playbook maps ContextOps accountability to ContextBound
 
 It defines who should approve boundary crossings, which evidence they need, and which technical preconditions must exist before a crossing is allowed.
 
+> Claim limits for all consulting material are in [README.md](README.md). Read them before client use.
+
 ## Stakeholder Roles
 
 | Stakeholder | Primary Concern |

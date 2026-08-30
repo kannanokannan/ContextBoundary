@@ -4,6 +4,8 @@ The Executive Readout translates ContextBoundary findings into business risk, in
 
 Use this template after discovery, assessment, scoring, and contract review are complete.
 
+> Claim limits for all consulting material are in [README.md](README.md). Read them before client use.
+
 ## 1. Executive Summary
 
 Answer three questions:
