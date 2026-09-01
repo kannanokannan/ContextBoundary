@@ -45,6 +45,7 @@ A standard ContextBoundary consulting engagement has six phases:
 - [CLOUD Act Contract Checklist](cloud-act-contract-checklist.md) - vendor contract review prompts for data residency, legal sovereignty, telemetry, retention, and subprocessors.
 - [Stakeholder Playbook](stakeholder-playbook.md) - approval gates and stakeholder responsibilities by Egress Tier and Boundary Zone.
 - [Executive Readout Template](executive-readout-template.md) - board-level summary structure.
+- [Case Study: A Decision Without a Receipt](case-study-decision-without-a-receipt.md) - a documented incident showing what a decision costs when it carries no evidence.
 
 ## Consulting Boundary
 
