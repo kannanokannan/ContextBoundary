@@ -30,7 +30,7 @@ MCP exposes or connects capabilities; ContextBoundary governs whether they are v
 - [maturity-ladder.md](https://github.com/kannanokannan/ContextBoundary/blob/main/maturity-ladder.md): Runtime-side maturity ladder for enforcement-point configuration
 - [patterns/](https://github.com/kannanokannan/ContextBoundary/tree/main/patterns): Runtime boundary, MCP boundary, and controlled wrapper deployment patterns
 - [examples/policy.yaml](https://github.com/kannanokannan/ContextBoundary/blob/main/examples/policy.yaml): Sample policy shape for discovery, invocation, approval, and audit
-- [consulting/](https://github.com/kannanokannan/ContextBoundary/tree/main/consulting): Egress assessment, contract checklist, stakeholder playbook, and executive readout assets
+- [consulting/](https://github.com/kannanokannan/ContextBoundary/tree/main/consulting): Practitioner kit — engagement shapes, SOW skeleton, scoring worksheet, egress assessment, contract checklist, stakeholder playbook, executive readout
 
 ## Related projects
 

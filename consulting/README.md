@@ -1,8 +1,15 @@
-# ContextBoundary Consulting Enablement
+# ContextBoundary Assessment Practice — Practitioner Kit
 
-This directory packages ContextBoundary into repeatable consulting engagements. It is for enterprise consultants, risk advisors, cloud and security architects, procurement teams, and compliance transformation groups that need a practical way to assess and remediate AI egress risk.
+This directory packages ContextBoundary into repeatable engagements. It is written for the people
+who deliver such work — architects and advisers at services firms, and internal enterprise
+architecture, security, and risk teams — and for procurement and compliance groups that need a
+practical way to assess and remediate AI egress risk. It is not something a client buys. It is
+what a practitioner runs.
 
-These materials are enablement assets, not legal advice, compliance certification, or product commitments. They help consultants structure discovery, evidence collection, contract review, stakeholder alignment, and executive reporting around the ContextBoundary specification.
+These materials are enablement assets, not legal advice, compliance certification, or product
+commitments. They help practitioners structure discovery, evidence collection, contract review,
+stakeholder alignment, demonstration, and executive reporting around the ContextBoundary
+specification.
 
 ## What you may and may not claim
 
@@ -16,6 +23,12 @@ Every document in this directory is governed by the statements below. They are s
 
 Do not soften these in a client setting. Overstating them costs more than the engagement is worth.
 
+## Delivery record
+
+**No engagement has yet been delivered with this kit.** The shapes, effort estimates, and
+worksheet are a practitioner's best construction, not a record of what happened in a room. This
+line is removed when the first written readout exists, and not before.
+
 ## What changed in 2026
 
 This package was first written before the reference gateway existed. The material below is still current, but the engagement it supports has changed in one important way:
@@ -26,19 +39,35 @@ This package was first written before the reference gateway existed. The materia
 
 That changes phases 2 and 5 of the lifecycle below: current-state assessment gains a working reference for what "enforced" looks like, and the remediation roadmap can point at something runnable rather than a diagram. See the [Demonstration Guide](demonstration-guide.md).
 
+## Engagement Shapes
+
+Three time-boxed engagements, each with duration, effort in person-days, team, client
+dependencies, deliverables, and acceptance. No prices — the delivering firm prices its own work.
+
+| Shape | Duration | Effort |
+|---|---|---|
+| Discovery Workshop | one day | ~3 pd |
+| Boundary Assessment | three weeks | ~20 pd |
+| Demonstration | half a day | ~1 pd |
+
+Entry criteria and when to decline are in [Engagement Shapes](engagement-shapes.md). Start there.
+
 ## Engagement Lifecycle
 
-A standard ContextBoundary consulting engagement has six phases:
+A full Boundary Assessment has six phases:
 
 1. **Discovery Workshop** - identify AI workloads, agents, MCP servers, context sources, vendors, and current crossings.
 2. **Current-State Assessment** - inspect architecture, egress paths, tool discovery, invocation controls, and audit evidence.
-3. **Maturity Scoring** - score the organization against the ContextBoundary Egress Assessment model.
+3. **Maturity Scoring** - score the organization against the ContextBoundary Egress Assessment model, using the Scoring Worksheet.
 4. **Vendor Contract Review** - review MSAs, DPAs, BAAs, SCCs, subprocessors, telemetry, training exclusions, audit rights, and retention clauses as technical risk inputs.
 5. **Boundary Remediation Roadmap** - define the target-state boundary, required controls, policy gaps, and sequenced remediation.
 6. **Executive Readout** - translate technical findings into business risk, investment priorities, and accountable next steps.
 
 ## Deliverables
 
+- [Engagement Shapes](engagement-shapes.md) - the three shapes: duration, effort, team, deliverables, acceptance, entry criteria, when to decline.
+- [SOW Skeleton](sow-skeleton.md) - statement-of-work template built around the shapes; fixed sections carry the claim limits.
+- [Scoring Worksheet](scoring-worksheet.md) - interview questions, evidence request, per-category scoring anchors, and the summary table that feeds the readout.
 - [Workshop Agenda](workshop-agenda.md) - phase-one discovery workshop runbook.
 - [Egress Assessment](egress-assessment.md) - maturity model, scoring categories, interview questions, evidence requests, and outputs.
 - [Demonstration Guide](demonstration-guide.md) - how to show the boundary working, using the reference gateway.
@@ -46,6 +75,11 @@ A standard ContextBoundary consulting engagement has six phases:
 - [Stakeholder Playbook](stakeholder-playbook.md) - approval gates and stakeholder responsibilities by Egress Tier and Boundary Zone.
 - [Executive Readout Template](executive-readout-template.md) - board-level summary structure.
 - [Case Study: A Decision Without a Receipt](case-study-decision-without-a-receipt.md) - a documented incident showing what a decision costs when it carries no evidence.
+
+## Questions from practitioners
+
+Open an issue on this repository with the label `engagement`. Say which shape, which phase, and
+what the room asked that the kit did not answer. That is how the kit improves.
 
 ## Consulting Boundary
 
@@ -58,4 +92,5 @@ ContextBoundary consulting work should stay within these limits:
 - Do not create another framework such as CapabilityOps.
 - Keep ContextOps as the accountability layer and ContextBoundary as the boundary-control layer.
 
-The consulting package exists to make the open specification actionable in client engagements while preserving vendor neutrality.
+The kit exists to make the open specification actionable in client engagements while preserving vendor neutrality.
+````
