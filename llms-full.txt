@@ -151,7 +151,7 @@ gdpr.md                - GDPR Audit Profile
 contextops-mapping.md  - ContextOps connector spec
 maturity-ladder.md     - Runtime-side maturity ladder for enforcement-point configuration
 CONTRIBUTING.md        - Contribution guidelines
-consulting/            - Egress assessment, contract checklist, stakeholder playbook, and executive readout assets
+consulting/            - Practitioner kit: engagement shapes, SOW skeleton, scoring worksheet, egress assessment, contract checklist, stakeholder playbook, executive readout
 patterns/              - Runtime, MCP, and controlled wrapper deployment patterns
 examples/policy.yaml   - Sample policy shape
 

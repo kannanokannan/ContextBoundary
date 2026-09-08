@@ -163,7 +163,7 @@ All three are buyable outcomes. ContextBoundary makes the diagnosis legible.
 - Vendor-continuity controls for continuity classification, fallback pre-classification, and suspension handling ([vendor-continuity.md](./vendor-continuity.md))
 - Adoption patterns for runtime boundaries, MCP filtering, and controlled wrapper deployments ([patterns/](./patterns/))
 - Example policy shape for discovery, invocation, approvals, and audit ([examples/policy.yaml](./examples/policy.yaml))
-- Consulting enablement assets for egress assessment, contract review, stakeholder approval, and executive readout ([consulting/](./consulting/))
+- Practitioner kit for AI boundary assessment: engagement shapes, SOW skeleton, scoring worksheet, contract review, stakeholder approval, and executive readout ([consulting/](./consulting/))
 
 ---
 
@@ -215,13 +215,18 @@ contextboundary/
 ├── maturity-ladder.md                 # Runtime-side maturity ladder for enforcement-point configuration
 ├── llms.txt                           # LLM discoverability summary
 ├── llms-full.txt                      # Full LLM digest
-├── consulting/                        # Repeatable consulting engagement assets
+├── consulting/                        # Practitioner kit: engagement shapes, worksheet, readout
 │   ├── README.md
+│   ├── engagement-shapes.md
+│   ├── sow-skeleton.md
+│   ├── scoring-worksheet.md
 │   ├── workshop-agenda.md
 │   ├── egress-assessment.md
+│   ├── demonstration-guide.md
 │   ├── cloud-act-contract-checklist.md
 │   ├── stakeholder-playbook.md
-│   └── executive-readout-template.md
+│   ├── executive-readout-template.md
+│   └── case-study-decision-without-a-receipt.md
 ├── patterns/                          # Adoption and implementation patterns
 │   ├── README.md
 │   ├── runtime-boundary.md
