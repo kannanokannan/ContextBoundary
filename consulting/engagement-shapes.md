@@ -76,4 +76,3 @@ Shape 3 runs inside week 2. If Shape 1 was delivered separately, credit its 3 pd
 
 The [SOW Skeleton](sow-skeleton.md) is built around these three shapes. Pick one, fill the
 brackets, and attach this file so the client sees the same definition the firm is working from.
-````
