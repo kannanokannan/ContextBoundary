@@ -200,4 +200,3 @@ Runtime maturity ladder level, scored separately: `[ ]`
 
 Carry the summary table into Section 3 of the [Executive Readout](executive-readout-template.md)
 unchanged.
-````

@@ -93,4 +93,3 @@ ContextBoundary consulting work should stay within these limits:
 - Keep ContextOps as the accountability layer and ContextBoundary as the boundary-control layer.
 
 The kit exists to make the open specification actionable in client engagements while preserving vendor neutrality.
-````
