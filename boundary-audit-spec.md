@@ -76,6 +76,8 @@ Per session, a signed hash chain.
 - **`seal_method` (pluggable, self-describing — DA-3):** recorded in the seal so a verifier needs no out-of-band knowledge. Default `hmac-sha256`. Available: `hmac-sha256` (baseline — detects rewrite by anyone without `K_seal`), `sig-ed25519` (asymmetric — operator cannot forge), `anchored-<method>` (seal hash published to an append-only store outside operator control — operator-independent). 
 - `seal_sig`: the signature over `canonical(seal_without_event_hash)` under the chosen method's key.
 
+> **Reference implementation divergence** — verified 2026-09-11 against the gateway source. `contextboundary-gw` records the seal algorithm in the field **`seal_alg`**, with the value **`ed25519`**, rather than `seal_method` / `sig-ed25519`. It always seals with Ed25519 and never uses the `hmac-sha256` default. DA-3's requirement is met in substance — the algorithm is recorded in the seal and its verifier reads it from there, so no out-of-band knowledge is needed — but a third-party verifier written from this specification will look for `seal_method` and not find it. **The ratified default is unchanged. This note records the divergence; it does not sanction it.**
+
 Strength note: the *default* (HMAC) is what an evaluator sees, so the v1 launch claim is worded to the default — "tamper-evident against outsiders/rogue processes; operator-independent anchoring available." Making anchoring the default is a Phase-C positioning decision, not a build change (the field already supports it).
 
 ### 4.6 Deletion tombstone (DA-2)
