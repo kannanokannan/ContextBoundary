@@ -17,7 +17,7 @@ Every document in this directory is governed by the statements below. They are s
 
 - **AARM is a Cloud Security Alliance standard, not a Context Stack standard.**
 - **ContextBoundary is AARM-aligned. No conformance claim is made.** Its reference gateway implements all AARM v1.0 Core requirements (R1–R6) and verifies them in CI. That is alignment, not conformance.
-- **Not listed on the CSA Builders Registry.**
+- **Not listed on the CSA Builder Registry.**
 - **No independent conformance review has been undertaken.**
 - ContextBoundary is a specification. `contextboundary-gw` is a reference implementation. **Neither is a product, and neither is offered as a hosted service.**
 
