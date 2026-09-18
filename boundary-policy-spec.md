@@ -156,6 +156,8 @@ Semantics (in protection ordinal p, higher = more protected):
 
 **Explicit non-goal (ratified):** v0 detectors are a small explicit allowlist, NOT general DLP. Gaps beyond the set are known and documented, not hidden. Expanding the set is a versioned policy change.
 
+**Explicit non-goal (ratified, D-A 2026-09-18):** v0 detectors classify **response** payloads only. Request payloads — the arguments and prompts sent outward — are not classified by this specification. An invocation is authorized by R1–R3 before dispatch; its content is not inspected. Implementations MUST NOT claim that outbound request content is classified under v0.
+
 ### 3.8 Approval obligation shape (Q3 ratified: record-and-return)
 
 `approve` is a **terminal, audited decision**: the gateway records the requirement and stops; fulfilment is out-of-band. Brokering (hold-and-resume) is Phase C — spec'd, not built, excluded from the stateless v0 path.
