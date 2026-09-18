@@ -104,7 +104,9 @@ Model inference providers. Tier II or Tier III depending on data classification 
 
 Tier numbering is egress-centric. Lower number = higher protection. This is locked and must not be inverted.
 
-Every outbound request is tagged before it crosses the boundary. The boundary enforces. The audit trail records.
+Every outbound request is tagged before it crosses the boundary. The audit trail records the decision.
+
+**Scope of automatic enforcement (v0.x).** The reference mechanism specified in `boundary-policy-spec.md` classifies **response** payloads at the crossing: a capability's declared egress tier is the floor, and content detectors may raise it. Classification of **outbound request content** — the arguments and prompts sent to a capability — is not specified in v0 and is not performed by the reference gateway. Invocation of a capability is authorized before dispatch on identity, source trust and autonomy tier; the bytes of the request are not classified. Tagging, declaration and logging of outbound requests are obligations on the adopting organization. Extending classification to request payloads is open design work, and this scope statement will narrow when it ships.
 
 ## Crossing Points and Legal Instruments
 

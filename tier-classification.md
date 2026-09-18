@@ -45,7 +45,7 @@ Specific regulations map their own categories onto these tiers through Audit Pro
 
 ### Tier III — Explicit Per-Call API Escalation
 
-**Egress rule.** Data classified at Tier III may egress to external zones but only via an explicit, per-call escalation. Each outbound request must carry a declared intent, a named receiving endpoint, and a log entry. No implicit or batch egress.
+**Egress rule.** Data classified at Tier III may egress to external zones but only via an explicit, per-call escalation. Each outbound request must carry a declared intent, a named receiving endpoint, and a log entry. No implicit or batch egress. These are obligations on the calling system; see `boundary-policy-spec.md` for what the reference mechanism classifies automatically, which in v0 is response payloads only.
 
 **Data profile.** Information that is publicly available, intentionally published, or without confidentiality or regulatory constraint. Generic queries, public documentation, marketing copy, unstructured external communication, public knowledge base content. Data where the organisation has determined that external processing carries no regulatory or reputational risk.
 
