@@ -14,6 +14,8 @@ The framework operates at the technical layer. It overlays existing infrastructu
 
 ContextBoundary fills a specific gap. For runtime action authorization, the open standard is AARM v1.0 (Cloud Security Alliance). ContextBoundary maps to its Protocol Gateway architecture as an AARM-aligned strict-determinism profile: all Core requirements (R1–R6) are implemented and CI-verified, while independent conformance review has not yet been undertaken. R7 is a designed deterministic divergence using envelope-drift counting, and R8 OpenTelemetry export is implemented. The reference gateway is verifiable from a clean clone; production deployment remains pending. But AARM is action-authorization-centric and specifies no data-sovereignty or vendor-continuity model. Those extensions - Egress Tiers, vendor/jurisdiction zones and Audit Profiles, vendor continuity - are ContextBoundary's contribution. Production operation and independent CSA TWG evidence review remain required before any AARM conformance claim.
 
+**Which parts of this framework a conformance suite can test.** The testable contract is `boundary-policy-spec.md`, `boundary-conformance-scenarios.md` and `boundary-audit-spec.md`. The crossing rules in `tier-classification.md` and the legal-instrument requirements below are normative obligations on the adopting organization that no suite can check. The five Boundary Zones, the Audit Profiles and the Endpoint Atlas are descriptive models with no machine representation in v0. All three categories are part of the framework; only the first is a conformance target. `README.md` states this division in full.
+
 North Star: the boundary diagram a CIO can read in seconds.
 
 ## Why Now
