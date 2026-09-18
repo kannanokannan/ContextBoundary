@@ -26,6 +26,20 @@ ContextBoundary is also a policy boundary for AI agents. MCP exposes or connects
 
 It is deployment-agnostic. The specification does not decide where the AI runs. It decides where data is allowed to go, which boundary controls apply, and which audit evidence must exist before or after a crossing.
 
+## Normative status of each document
+
+What a conformance suite can test is not the same question as what this framework requires. Both are normative; only one is automatable. The documents divide three ways.
+
+**Conformance-testable.** `boundary-policy-spec.md`, `boundary-conformance-scenarios.md` and `boundary-audit-spec.md`. An implementation can be tested against these, and the reference gateway is. If you are building an implementation, these are the contract.
+
+**Normative but organizational.** The crossing rules in `tier-classification.md` and the legal-instrument requirements in `FRAMEWORK.md`. These are obligations on the adopting organization — declare the intent, name the receiving endpoint, cover the crossing with an instrument, log it. No conformance suite can check them, and they are required anyway.
+
+**Descriptive.** The five Boundary Zones diagram, the Audit Profiles, and the Endpoint Atlas. Models and reference material for reasoning about a deployment. They carry no machine representation in v0 and none is implied.
+
+A reader building software should start at `boundary-policy-spec.md`. A reader governing an estate should start at `FRAMEWORK.md`. Neither is the whole specification.
+
+See also the scope of automatic enforcement in `FRAMEWORK.md`: the reference mechanism classifies response payloads, not outbound request content.
+
 It is the technical-layer companion to [**ContextOps**](https://github.com/kannanokannan/ContextOps) (organisational governance) and is consumed by [**Sthala**](https://github.com/kannanokannan/Sthala) (governed runtime reference implementation).
 
 ---
