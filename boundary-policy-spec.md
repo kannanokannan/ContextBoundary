@@ -124,7 +124,7 @@ audit:
     - accountable_owner
     - tier_in_force
     - action
-    - decision            # allow | deny | approve
+    - decision            # allow | deny | approve | modify | defer  (§3.9)
     - rule_id             # which rule decided
     - egress_tier_seen    # effective sensitivity after detectors (§3.7)
     - detector_id         # present when a detector escalated (null otherwise)
@@ -171,6 +171,67 @@ obligation:
 ```
 Emitted in the audit record and returned in the structured response to the caller. The boundary's claim is evidential: "this needed approval, here is the evidence."
 
+### 3.9 Decision vocabulary, remediation transforms and deferral
+
+A decision is one of **five** values. `allow`, `deny` and `approve` are described above; `modify` and `defer` are described here. This enumeration is closed: an implementation MUST NOT emit a decision outside it.
+
+| Decision | Meaning | Action executes? |
+|---|---|---|
+| `allow` | Permitted as submitted | yes |
+| `deny` | Refused; the deciding rule is named | no |
+| `approve` | Recorded and returned for a named role; terminal in v0 (§3.8) | no |
+| `modify` | A declared transform narrowed the action; the narrowed form proceeds | yes, as transformed |
+| `defer` | A declared condition is unmet; the action is held against a resume token | not yet |
+
+#### Remediation transforms
+
+Transforms are declared under `remediation` and bound to a **decision outcome**, not to a capability — a rule matches on `rule_id`, `reason`, and optionally `detector_id`.
+
+```yaml
+remediation:
+  transforms:
+    - id: strip_field
+      path: [payload, legacy_credential]
+    - id: redact_match
+      path: [payload, note]
+      pattern: '(password|credential|secret)\s*[=:]\s*[^\s]+'
+    - id: clamp_tier
+      path: [payload_egress_tier]
+      ceiling: I
+  rules:
+    - rule_id: R4
+      reason: egress_violation
+      detector_id: det:credential-pattern
+      transforms: [strip_field, redact_match, clamp_tier]
+```
+
+The v0 transform set is a closed allowlist of three. `strip_field` removes the value at `path`. `redact_match` replaces every match of `pattern` at `path` with `[REDACTED]`, matching case-insensitively and globally. `clamp_tier` lowers the egress tier at `path` to `ceiling`, and applies only when `ceiling` is at least as protected as the current value.
+
+**Two invariants govern every transform.**
+
+1. **Narrowing only.** A transform MUST NOT widen what the action exposes. `strip_field` and `redact_match` narrow by construction; `clamp_tier` applies only in the protective direction. This is the mirror of §3.7: detectors may only raise protection, transforms may only reduce exposure. Neither may move the other way.
+2. **No silent no-ops.** If the canonical form of the transformed action is identical to the canonical form of the original, the transform MUST be treated as not applied and the decision MUST NOT be `modify`. A `modify` decision therefore always denotes a real change to the action.
+
+A `modify` decision carries `transform_id`, `original_action_hash` and `resulting_action_hash`, the last two being SHA-256 over the canonical form of the action before and after. A reviewer can therefore prove which transform ran and that the action changed, without the payload appearing in the record.
+
+#### Deferral
+
+A deferral holds an otherwise-permitted action until a named condition is satisfied. Deferral is evaluated only when the action would otherwise be allowed.
+
+```yaml
+  defer_rules:
+    - id: wait-for-source-ready
+      action_type: invoke
+      capability: triage-alert
+      when: { path: [payload, source_ready], equals: false }
+      resume_condition: source-ready
+      resume_path: [payload, source_ready]
+```
+
+A matching rule produces `decision: defer` with a `resume_token` and a `defer_reason` naming the rule. The held action is durable: it is not executed, and it is not discarded. Resumption MUST supply both the session and the resume token, and the satisfied condition's identifier MUST equal the rule's `resume_condition` — a condition with any other identifier MUST NOT resume the action. On resumption the value at `resume_path` is set and the action is re-evaluated from the beginning; deferral is not a stored authorization.
+
+**Scope note.** This section documents behaviour present in the reference gateway and exercised by the conformance suite. It was added to the specification in 2026-09 after two independent implementability reviews found the decision vocabulary under-specified; the implementation was already emitting `modify` and `defer`.
+
 ## 4. The five canonical rules (decision order)
 
 Evaluated top-down; first match that denies wins; closed by default.
@@ -178,7 +239,7 @@ Evaluated top-down; first match that denies wins; closed by default.
 1. **R1 Identity (E1/A1):** action lacks a bound `accountable_owner` → **deny**(unbound_identity).
 2. **R2 Discovery + source trust (E3/A4):** at discovery, return only capabilities where tier ≥ discover_min_tier AND source ∈ trusted_sources. **At invocation, the source-trust predicate is re-checked first:** source ∉ trusted_sources → **deny**(untrusted_source) before R3 is reached. (Locks the S-R2-04 / S-R3-04 precedence — see conformance v0.2.1.)
 3. **R3 Tier (E2/A2):** invoke where agent.tier < capability.required_tier → **approve**(tier_escalation) with obligation (§3.8) if approvable, else **deny**. Tier is taken from the policy binding, never from payload.
-4. **R4 Egress (CANON):** effective_p(response) — declared floor escalated by detectors (§3.7) — **exceeds the crossing ceiling's protection** → **deny**(egress_violation). audit carries detector_id when a detector caused the escalation. (i.e. data more protected than the crossing permits.)
+4. **R4 Egress (CANON):** effective_p(response) — declared floor escalated by detectors (§3.7) — **exceeds the crossing ceiling's protection** → **deny**(egress_violation), unless a declared remediation transform (§3.9) narrows the action, in which case → **modify**(transform_applied). audit carries detector_id when a detector caused the escalation. (i.e. data more protected than the crossing permits.)
 5. **R5 Continuity (V3):** target endpoint suspended → reroute to equal-or-stricter (equal-or-higher-p) fallback; none → **deny**(no_fallback).
 
 These five are the conformance backbone (D3). With §8 ratified and the tier direction corrected, S-R4-03 is must-pass (see conformance v0.2.1).
