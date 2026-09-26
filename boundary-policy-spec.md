@@ -1,9 +1,9 @@
 # Boundary Policy Schema (D1)
 
 **ContextBoundary — machine-checkable policy vocabulary.**
-Version: 0.2.1 (2026-07-09) · Status: §8 ratified 07-08; **egress-tier direction corrected to canon 07-09** · License: Apache 2.0
+Version: 0.2.2 (2026-09-20) · Status: §8 ratified 07-08; egress-tier direction corrected to canon 07-09; **decision vocabulary §3.9 added 09-20** · License: Apache 2.0
 
-Supersedes v0.2. The only substantive change from v0.2 is the egress-tier correction (§3.2, §3.4, §3.7, §4/R4, examples) — v0.2 inverted the canonical tier direction; this is fixed here. All other v0.2 content (detectors, obligation shape, domain-reserved, wildcard rejection) is unchanged.
+Supersedes v0.2.1. v0.2.1's only substantive change over v0.2 was the egress-tier correction (§3.2, §3.4, §3.7, §4/R4, examples) — v0.2 inverted the canonical tier direction. v0.2.2 adds §3.9 (decision vocabulary, remediation transforms, deferral) and aligns §3.6 and R4 with it. All other v0.2 content (detectors, obligation shape, domain-reserved, wildcard rejection) is unchanged.
 
 This is the compilable form of the framework: it expresses agent-authority (A1–A4), enforcement (E1–E3), vendor-continuity (V1–V3), and egress tiers as one declarative document a gateway can evaluate. It defines meaning and shape only — not the engine. Engine (D-03): OPA/Rego; the schema stays engine-neutral and a compiler emits Rego from boundary-policy.yaml.
 
@@ -230,7 +230,7 @@ A deferral holds an otherwise-permitted action until a named condition is satisf
 
 A matching rule produces `decision: defer` with a `resume_token` and a `defer_reason` naming the rule. The held action is durable: it is not executed, and it is not discarded. Resumption MUST supply both the session and the resume token, and the satisfied condition's identifier MUST equal the rule's `resume_condition` — a condition with any other identifier MUST NOT resume the action. On resumption the value at `resume_path` is set and the action is re-evaluated from the beginning; deferral is not a stored authorization.
 
-**Scope note.** This section documents behaviour present in the reference gateway and exercised by the conformance suite. It was added to the specification in 2026-09 after two independent implementability reviews found the decision vocabulary under-specified; the implementation was already emitting `modify` and `defer`.
+**Scope note.** This section documents behaviour present in the reference gateway. `modify` is exercised by the conformance corpus (S-R4-04); `defer` is exercised only by the gateway's own R4 suite and by no scenario in that corpus. In the reference gateway both decisions are reachable only on the session-bound path — an unsessioned request yields `allow`, `deny` or `approve`. This section was added in 2026-09 after two independent implementability reviews found the decision vocabulary under-specified; the implementation was already emitting `modify` and `defer`.
 
 ## 4. The five canonical rules (decision order)
 
@@ -332,6 +332,7 @@ Notes:
 - Q4 egress: hybrid — declared floor + escalate-only detectors; escalate on uncertainty; NOT general DLP. (§3.7)
 
 ## Changelog
+- 2026-09-20 — **v0.2.2.** §3.9 added: the closed five-value decision vocabulary, the three-transform remediation allowlist (`strip_field`, `redact_match`, `clamp_tier`) with its narrowing-only and no-silent-no-op invariants, and deferral. §3.6 decision enum and R4 updated to match. The section documents behaviour the reference gateway already implemented and no specification stated; the version bump and this entry were omitted when it was added and are recorded here. Scope note corrected: `defer` is exercised by no scenario in the conformance corpus.
 - 2026-07-09 — **v0.2.1. Egress-tier direction corrected to canon (context-stack GLOSSARY / ContextBoundary CLAUDE.md: Tier I most restrictive, DO NOT INVERT).** v0.1 and v0.2 inverted it (I=freely-crossable) — an implementation error flagged by the 07-09 build log (ambiguity #2). Added §0 protection ordinal to fix direction unambiguously; §3.2 relabelled; capability.egress_tier reinterpreted as sensitivity floor; §3.7 detectors escalate toward Tier I (credential min_tier I, not III); R4 restated as "data more protected than crossing ceiling → deny"; Example B read-secrets → Tier I, detector → Tier I; compiler must map I→p3 explicitly. All other v0.2 content unchanged. This update replaces the v0.2/v0.1 files currently in docs/.
 - 2026-07-09 — v0.2 (superseded). §8 folded in: egress_detectors, obligation shape, domain reserved, wildcard rejection. Contained the tier inversion.
 - 2026-07-08 — v0.1 (superseded). Full shape, 5 rules, 2 examples, JSON Schema. Contained the tier inversion.

@@ -1,9 +1,9 @@
 # Boundary Audit Spec (D4)
 
 **The evidential half of the thesis: reconstruct what happened from logs + policy alone.**
-Version 0.1.1 (2026-07-10) · Status: **RATIFIED** (DA-1/2/3 resolved 2026-07-10) · Author: Kannan
-Normative. Belongs in the ContextBoundary framework repo (not the gateway). Pairs with boundary-policy-spec.md v0.2.1 and boundary-conformance-scenarios.md v0.2.1.
-Supersedes v0.1 DRAFT. Only change: the three open decisions are ratified and folded in — pluggable+self-describing algorithms (DA-1, DA-3), mandatory retention with audited deletion (DA-2). No mechanics changed from v0.1 beyond these.
+Version 0.1.2 (2026-09-20) · Status: **RATIFIED** (DA-1/2/3 resolved 2026-07-10) · Author: Kannan
+Normative. Belongs in the ContextBoundary framework repo (not the gateway). Pairs with boundary-policy-spec.md v0.2.2 and boundary-conformance-scenarios.md v0.2.3.
+Supersedes v0.1.1. v0.1.1 folded in the three ratified decisions — pluggable+self-describing algorithms (DA-1, DA-3), mandatory retention with audited deletion (DA-2). v0.1.2 extends the envelope to the five-value decision vocabulary and its conditional fields (§2, §2.1) and records three reference-implementation divergences. No mechanics and no guarantee changed.
 
 ---
 
@@ -38,14 +38,26 @@ hash_alg:    <recorded per event; default sha-256; pluggable — DA-1>
 
 # --- decision band (policy-spec fields) ---
 agent_id, accountable_owner, tier_in_force, action,
-decision (allow|deny|approve), rule_id (R1..R5), reason,
+decision (allow|deny|approve|modify|defer — policy-spec §3.9), rule_id, reason,
 egress_tier_seen (I|II|III|null), detector_id (|null), obligation (|null)
+
+# --- remediation + deferral band (policy-spec §3.9) ---
+transform_id, original_action_hash, resulting_action_hash   # iff decision == modify
+resume_token, defer_reason                                  # iff decision == defer
 
 # --- context band (§6) ---
 policy_hash: <hash of exact policy artifact in force>
 replay_inputs: <minimal privacy-safe rule inputs>
 timestamp:   <RFC3339; descriptive, not the ordering key — seq is>
 ```
+
+### 2.1 Conditional decision fields
+
+`transform_id`, `original_action_hash` and `resulting_action_hash` are present exactly when `decision == modify`; `resume_token` and `defer_reason` exactly when `decision == defer`. All five satisfy §1: the hashes are SHA-256 over the canonical action, the ids are policy identifiers, and none carries payload. A reviewer can therefore prove which transform ran, and that the action changed, without the action appearing in the log.
+
+A resumption is an ordinary decision event whose `action.type` is `deferred.resume`, carrying `resume_token` and the `resulting_action_hash` of the resumed action (§3).
+
+> **Reference implementation divergence** — verified 2026-09-20 against the gateway source. `contextboundary-gw` emits `rule_id: "E1"` on pre-rule identity failures (`identity_unverified`, `replay_detected`). `E1` is an enforcement-control id (agent-authority-enforcement.md), not one of the five canonical rules, so a verifier written from the former `R1..R5` constraint would reject a valid record. The constraint is dropped above; which ids are admissible follows from the rule set in force. **This note records the divergence; it does not sanction it.**
 
 ## 3. Spans and event types
 
@@ -60,6 +72,14 @@ Session = one agent interaction. Span = one decision. Spans form a causal tree v
 | reroute | continuity reroute/deny (R5) | the invoke/egress that hit suspension |
 | session.seal | session closes / checkpoint; seals + signs the chain; carries retention (§4.5) | session.start |
 | **session.delete** | a sealed session is deleted at retention expiry; tombstone proving lawful deletion (DA-2, §4.6) | references the sealed session |
+
+> **Reference implementation divergence** — verified 2026-09-20 against the gateway source. Two points.
+>
+> (a) `contextboundary-gw` emits a seventh chain event type, `envelope.amend`, when an action requires an amendment to the session's intent envelope. The intent-envelope subsystem it belongs to is not specified here, so the type is recorded rather than adopted.
+>
+> (b) `defer` and `deferred.resume` are **not** chain event types. `defer` is a decision (§2) on an ordinary `invoke` or `egress` event; a resumption is recorded as `event_type: invoke` with `action.type: deferred.resume`. Both names do appear as event types in the gateway's in-session action trace, which is a different structure from the audit chain and is not covered by this specification.
+>
+> **This note records the divergences; it does not sanction them.**
 
 ## 4. Chain construction (tamper-evident)
 
@@ -128,5 +148,6 @@ Adds 4 scenarios (21 → 25).
 Not a SIEM / not real-time alerting. Retention *duration* is deploy-time config (the requirement that it exist is normative — DA-2). Not encryption-at-rest (§1 means no Tier-I content in the log). Detector *correctness* is proven by policy conformance, not here.
 
 ## Changelog
+- 2026-09-20 — v0.1.2. Envelope §2: decision enum extended to the five values of policy-spec §3.9; remediation + deferral band added (`transform_id`, `original_action_hash`, `resulting_action_hash`, `resume_token`, `defer_reason`); the `R1..R5` constraint on `rule_id` dropped. New §2.1. Three reference-implementation divergences recorded (§2.1 `rule_id` `E1`; §3 `envelope.amend`, and `defer` / `deferred.resume` not being chain event types). No mechanics changed and no guarantee restated.
 - 2026-07-10 — v0.1.1 RATIFIED. DA-1/2/3 folded: pluggable self-describing `hash_alg` (default sha-256) and `seal_method` (default hmac-sha256, ed25519/anchored available); mandatory `retention.expires_at` in seal; `session.delete` tombstone event so expiry ≠ suppression; S-AUD-06 added (21→25); §9 moved from open → ratified. No other mechanics changed.
 - 2026-07-10 — v0.1 DRAFT. Envelope, span+parent model, signed hash chain, gap+tamper verification, policy-replay reconstruction, sink-neutral contract, privacy invariant, S-AUD redefinition, open DA-1..3.
