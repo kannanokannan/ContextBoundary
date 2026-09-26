@@ -1,7 +1,7 @@
 # Boundary Conformance Scenarios (D3 / WP3)
 
 **The falsification instrument for the boundary thesis.**
-Version 0.2.2 (2026-08-14) · Engine-agnostic (tests outcomes, not OPA) · Pairs with boundary-policy-spec.md
+Version 0.2.3 (2026-09-20) · Engine-agnostic (tests outcomes, not OPA) · Pairs with boundary-policy-spec.md
 Author: Kannan · Runs on the conformance harness: `npm test -- --target <gateway-url>` (optional: `--expect-policy-hash <hex>`)
 
 Each scenario: GIVEN (policy + identity + action) → EXPECT (decision + audit). The policy is bound by deployment, not supplied per request — the harness verifies it by asserting audit.policy_hash against the compiled policy artifact. A gateway conforms iff all pass under a declared policy hash. Adversarial scenarios (☆) put the attack inside prompts/tool-results — model assumed compromised; boundary must hold anyway.
@@ -97,7 +97,7 @@ Harness note for S-R4-04: tests the `redact_match` remediation transform, which 
 
 **Lock #6:** S-AUD-02 harness expectation — 3 ordered audit records (discover, invoke, egress), terminal rule_id R4, reason session_reconstructable, audit_chain_length 3. This is a provisional harness contract; the full D4 audit spec (queued specification work) will formalise event correlation fields. Until then, this harness shape is the reference.
 
-**Lock #7:** scenario prose uses "proceed"/"reroute"; the asserted decision vocabulary is allow/deny/approve. Harness maps successful proceed→allow and successful reroute→allow, and asserts the reroute target separately. Confirmed correct.
+**Lock #7:** scenario prose uses "proceed"/"reroute"; the asserted decision vocabulary is the five values of boundary-policy-spec §3.9 — allow, deny, approve, modify, defer. Harness maps successful proceed→allow and successful reroute→allow, and asserts the reroute target separately. `modify` is asserted by S-R4-04. `defer` is asserted by no scenario in this corpus — see Notes. Confirmed correct.
 
 ---
 
@@ -113,10 +113,12 @@ Harness note for S-R4-04: tests the `redact_match` remediation transform, which 
 
 ## Notes
 - 22 scenarios, 5 adversarial (☆), **0 expected-fail**.
-- Engine note (D-03): Rego returns allow/deny + obligations; harness asserts our vocabulary (allow/deny/approve) + rule_id + detector_id, so scenarios are unchanged by the engine choice.
+- Engine note (D-03): Rego returns allow/deny + obligations; harness asserts our vocabulary (boundary-policy-spec §3.9) + rule_id + detector_id, so scenarios are unchanged by the engine choice.
 - Detector scope: S-R4-03 tests exactly one enumerated detector. A secret matching no enumerated pattern passing through is a *documented* limitation (spec §3.7 non-goal), not a conformance failure.
+- **`defer` is not covered by this corpus.** The reference gateway exercises it in its own R4 suite (`test/r4/run.mjs`, asserting under the id `S-R4-DEF-01`), but no scenario here does, and `S-R4-DEF-01` is defined neither in this document nor in `scenarios.json`. A gateway can pass all 22 scenarios without implementing deferral at all. Closing this is corpus work, not a prose fix.
 
 ## Changelog
+- 2026-09-20 — **v0.2.3.** Lock #7 and the D-03 engine note corrected to the five-value decision vocabulary (boundary-policy-spec §3.9); both still named three after S-R4-04 introduced `modify` in v0.2.2, so the document contradicted itself. Recorded in Notes that no scenario in this corpus asserts `defer`. No scenario added, removed or changed — count stays 22 and `scenarios.json` is untouched.
 - 2026-08-14 — **v0.2.2.** Added S-R4-04; count 21 → 22 (R4×3 → R4×4). Policy is bound by deployment and verified via `audit.policy_hash`; the policy request parameter was removed from the harness. Added because `redact_match` was not exercised by any scenario and a compile-time regex regression passed 21/21 green.
 - 2026-07-09 — **v0.2.1. Egress direction corrected to canon** (Tier I most restrictive): read-secrets → Tier I, `loose` → zone III, detector min_tier → I, S-R4-02/03 relabelled, R5 protection direction restated. S-R4-03 xfail → must-pass. Count corrected 20→21. Ambiguity locks #3–#7 folded in (R2 source precedence at invocation; S-R3-05 same-reason + effective_tier assertion; S-R5-02/03 fixtures; S-AUD-02 provisional contract; proceed/reroute→allow mapping). This update replaces the v0.1 scenarios currently in the repo and rewires scenarios.json.
 - 2026-07-08 — v0.1 (superseded). 21 scenarios (stated 20 — miscount), inverted egress direction, S-R4-03 xfail.
