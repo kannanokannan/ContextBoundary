@@ -40,7 +40,7 @@ A reader building software should start at `boundary-policy-spec.md`. A reader g
 
 See also the scope of automatic enforcement in `FRAMEWORK.md`: the reference mechanism classifies response payloads, not outbound request content.
 
-It is the technical-layer companion to [**ContextOps**](https://github.com/kannanokannan/ContextOps) (organisational governance) and is consumed by [**Sthala**](https://github.com/kannanokannan/Sthala) (governed runtime reference implementation).
+It is the technical-layer companion to [**ContextOps**](https://github.com/kannanokannan/ContextOps) (organisational governance) and is consumed by [**Sthala**](https://github.com/kannanokannan/Sthala) (reference implementation for governed runtime placement).
 
 ---
 
@@ -183,15 +183,9 @@ All three are buyable outcomes. ContextBoundary makes the diagnosis legible.
 
 ## The Family
 
-ContextBoundary is one of three sibling open-source projects:
+ContextOps and ContextBoundary are the specification layer. contextboundary-gw, Sthala and Griha are reference implementations that apply it. The composition is defined once, in [COMPOSITION.md](https://github.com/kannanokannan/context-stack/blob/main/COMPOSITION.md).
 
-| Project | Answers |
-|---------|---------|
-| [**ContextOps**](https://github.com/kannanokannan/ContextOps) | How does an organisation govern its AI context? |
-| **ContextBoundary** (this repo) | Where is data allowed to go? |
-| [**Sthala**](https://github.com/kannanokannan/Sthala) | Where does the AI actually run? |
-
-ContextOps governs the organisational layer. ContextBoundary governs the egress layer. Sthala is a governed runtime reference that consumes ContextBoundary's contract.
+ContextBoundary is one of the two specifications: it governs where data is allowed to go. Its reference gateway is [contextboundary-gw](https://github.com/kannanokannan/contextboundary-gw). Sthala consumes ContextBoundary's egress contract.
 
 ---
 
@@ -267,12 +261,6 @@ ContextBoundary v0.1. Licensed under Apache 2.0. Feedback welcome via GitHub Iss
 
 ## Part of the Stack
 
-This project is one of three sibling open-source projects under [github.com/kannanokannan](https://github.com/kannanokannan).
-
-| Project | Question | Repo |
-|---------|----------|------|
-| ContextOps | How does an org govern its AI context? | [github.com/kannanokannan/ContextOps](https://github.com/kannanokannan/ContextOps) |
-| ContextBoundary | Where is data allowed to go? | [github.com/kannanokannan/ContextBoundary](https://github.com/kannanokannan/ContextBoundary) |
-| Sthala | Where does the AI actually run? | [github.com/kannanokannan/Sthala](https://github.com/kannanokannan/Sthala) |
+The stack's composition is stated once in this file, under [The Family](#the-family).
 
 Canonical terminology and cross-project decisions: [context-stack](https://github.com/kannanokannan/context-stack)

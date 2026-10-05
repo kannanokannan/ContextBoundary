@@ -35,19 +35,17 @@ Terminology defined in GLOSSARY.md overrides any local usage in this repo.
 
 ## The Framework Family
 
-ContextBoundary is one of three sibling open-source projects. Do not conflate them.
+ContextOps and ContextBoundary are the specification layer. contextboundary-gw, Sthala and Griha are reference implementations that apply it.
 
-| Project | Answers | Repo |
-|---------|---------|------|
-| **ContextOps** | How does an org govern its AI context? | https://github.com/kannanokannan/ContextOps |
-| **ContextBoundary** | Where is data allowed to go? | https://github.com/kannanokannan/ContextBoundary |
-| **Sthala** | Where does the AI actually run? | https://github.com/kannanokannan/Sthala |
+The composition is defined once, in COMPOSITION.md: https://github.com/kannanokannan/context-stack/blob/main/COMPOSITION.md
+
+ContextBoundary is one of the two specifications. It governs data egress and action. Do not conflate the two specifications with each other, or with the implementations that apply them.
 
 **Key relationship rules:**
 - ContextBoundary is the **horizontal governing layer** — deployment-agnostic
 - Sthala is **one vertical implementation** that consumes ContextBoundary's egress contract
 - ContextOps governs the organisational layer; ContextBoundary governs the egress layer
-- All three are Apache 2.0, enterprise-architecture-grade docs
+- Both specifications are Apache 2.0, enterprise-architecture-grade docs
 - Do not create `CapabilityOps`; capability governance is split between ContextOps accountability and ContextBoundary enforcement
 
 ---
