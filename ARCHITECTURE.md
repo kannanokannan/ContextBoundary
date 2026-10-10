@@ -70,8 +70,8 @@ v0.1 ships GDPR as the reference Audit Profile. Additional profiles will be adde
 
 ContextBoundary defines the technical egress contract. ContextOps governs the organisational layer around that contract.
 
-- ContextBoundary = the specification layer: what is allowed, what is classified, what must be audited
-- ContextOps = the governance layer: who owns the decision, how it is reviewed, how drift is handled
+- ContextBoundary = the egress specification: what is allowed, what is classified, what must be audited
+- ContextOps = the organisational specification: who owns the decision, how it is reviewed, how drift is handled
 
 See [contextops-mapping.md](contextops-mapping.md) for the full connector spec.
 
